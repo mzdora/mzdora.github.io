@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】跳跃游戏 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一些互联网的朋友跟我说，让我写个博客然后每天记录刷题、然后写题解。一是说可以增加对题目的印象，二呢就是他们说我讲题的思路特别清晰易懂，他们有不会的就可以来问我。 我倒是挺受宠若惊的，毕竟我这个名不见经传的小菜鸡也难得的被夸了一次。其实之前是有写过博客的，但是当时挺年轻，记录的都是一些简单题，而且也没什么解释就单纯的把代码贴上去了。而且由于当时自己对Typecho的模板代码进行了太多修改，导致现在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】跳跃游戏">
+<meta property="og:url" content="http://yoursite.com/2020/04/17/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="一些互联网的朋友跟我说，让我写个博客然后每天记录刷题、然后写题解。一是说可以增加对题目的印象，二呢就是他们说我讲题的思路特别清晰易懂，他们有不会的就可以来问我。 我倒是挺受宠若惊的，毕竟我这个名不见经传的小菜鸡也难得的被夸了一次。其实之前是有写过博客的，但是当时挺年轻，记录的都是一些简单题，而且也没什么解释就单纯的把代码贴上去了。而且由于当时自己对Typecho的模板代码进行了太多修改，导致现在">
+<meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2020-04-17T02:12:45.687Z">
+<meta property="article:modified_time" content="2020-04-17T02:39:07.874Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】跳跃游戏" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】跳跃游戏
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>一些互联网的朋友跟我说，让我写个博客然后每天记录刷题、然后写题解。一是说可以增加对题目的印象，二呢就是他们说我讲题的思路特别清晰易懂，他们有不会的就可以来问我。</p>
+<p>我倒是挺受宠若惊的，毕竟我这个名不见经传的小菜鸡也难得的被夸了一次。其实之前是有写过博客的，但是当时挺年轻，记录的都是一些简单题，而且也没什么解释就单纯的把代码贴上去了。而且由于当时自己对Typecho的模板代码进行了太多修改，导致现在已经不知从何改起。所以就在GitHub上新开了一个GitPage做博客，希望大家能够支持。</p>
+</blockquote>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/jump-game/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jump-game/</a></p>
+<p><strong>题目描叙</strong>：</p>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例1：</span><br><span class="line">输入: [2,3,1,1,4]</span><br><span class="line">输出: true</span><br><span class="line">解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例2：</span><br><span class="line">输入: [3,2,1,0,4]</span><br><span class="line">输出: false</span><br><span class="line">解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：</p>
+<p>解决这道题最直观的想法应该就是<strong>贪心算法(Greedy)</strong>了。想象一下我们站在<strong>数组起始点</strong>，然后我们每一次都跳在<strong>能跳到的最大位置</strong>，接着判断数组的<strong>索引</strong>是否大于<strong>能跳到的最大位置</strong>就好了。</p>
+<p>我们首先以示例1为例，我们从 <em>nums[0]</em> 位置起跳，我们最大能跳<strong>两格</strong>(因为<em>nums[0]=2</em>)，那我们能跳到的最远位置就是当前站着的<strong>0</strong>加上<strong>2(两格)</strong>，也就是<strong>2</strong>。这时候我们维护一下<strong>能跳到的最大位置</strong>，很现在目前是<strong>2</strong>。然后接着我们再对<em>nums[1]</em>位置起跳，由于<em>nums[1]=3</em>，所以我们<strong>能跳到的最大位置</strong>就是<strong>1</strong>加上<strong>3(三格)</strong>，也就是<strong>4</strong>，以此类推，也就是说只要 <strong>能跳到的位置不小于索引值，那么我们最终都可以跳到终点</strong>。</p>
+<p>好了，我们明白了这道题的思路之后，很容易就能写下代码。</p>
+<p><strong>题目代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max_dis = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( i &gt; max_dis )&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            max_dis = Math.max(max_dis,i+nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/04/17/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/" class="article-date">
+  <time class="dt-published" datetime="2020-04-17T02:12:45.687Z" itemprop="datePublished">2020-04-17</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/04/16/%E6%9C%8B%E5%8F%8B%E4%BB%AC/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">朋友们</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>人間が唯一偉大であるのは、自分を越えるものと闘うからである。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
