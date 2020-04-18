@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】不同路径 I,II | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是一道乍一看回溯法，实际上动态规划的题。 有意思的是，它连动态规划的表格都帮你画好了，就怕你想不到。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;unique-paths&#x2F; 题目描叙: 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Fin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】不同路径 I,II">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%20I,II/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="这是一道乍一看回溯法，实际上动态规划的题。 有意思的是，它连动态规划的表格都帮你画好了，就怕你想不到。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;unique-paths&#x2F; 题目描叙: 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Fin">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/robot_maze.png">
+<meta property="article:published_time" content="2020-04-18T17:56:24.954Z">
+<meta property="article:modified_time" content="2020-04-18T22:31:14.578Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/robot_maze.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】不同路径 I,II" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】不同路径 I,II
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>这是一道乍一看回溯法，实际上动态规划的题。</p>
+<p>有意思的是，它连动态规划的表格都帮你画好了，就怕你想不到。</p>
+</blockquote>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/unique-paths/</a></p>
+<p><strong>题目描叙</strong>:</p>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/robot_maze.png" alt="img"></p>
+<p>例如，上图是一个7 x 3 的网格。有多少可能的路径？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: m &#x3D; 3, n &#x3D; 2</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从左上角开始，总共有 3 条路径可以到达右下角。</span><br><span class="line">1. 向右 -&gt; 向右 -&gt; 向下</span><br><span class="line">2. 向右 -&gt; 向下 -&gt; 向右</span><br><span class="line">3. 向下 -&gt; 向右 -&gt; 向右</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: m &#x3D; 7, n &#x3D; 3</span><br><span class="line">输出: 28</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示</strong>：</p>
+<p>1 &lt;= m, n &lt;= 100<br>题目数据保证答案小于等于 2 * 10 ^ 9</p>
+<p><strong>题目分析</strong>：</p>
+<p>我们从 <strong>Finish的那个小星星</strong> 看起，对于小星星来说，我只有 <strong>1条路径</strong> 通往自己。然后看小星星<strong>上面的方块和左边的方块</strong>，因为我们的题目机器人每次<strong>只能向下或者向右移动一步</strong>，所以也只有 <strong>1条路径</strong> 通往小星星。</p>
+<p>对于其他方块来说，我们将该<strong>格子到右下角小星星的路径条数</strong>作为转移量，有状态转移方程:<br>$$<br>dp[i][j] = dp[i+1][j] + dp[i][j+1];<br>$$<br>我们可以直接得出代码:</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( m == <span class="number">0</span> || n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        dp[m-<span class="number">1</span>][n-<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++ )&#123;</span><br><span class="line">            dp[i][n-<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++ )&#123;</span><br><span class="line">            dp[m-<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = m-<span class="number">2</span>;i &gt;= <span class="number">0</span>;i-- )&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = n-<span class="number">2</span>;j &gt;= <span class="number">0</span>;j-- )&#123;</span><br><span class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j] + dp[i][j+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>现在我们换个条件，现在我们的网格里面有<strong>障碍物</strong>。网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">示例 :</span><br><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">  [0,0,0],</span><br><span class="line">  [0,1,0],</span><br><span class="line">  [0,0,0]</span><br><span class="line">]</span><br><span class="line">输出: 2</span><br><span class="line">解释:</span><br><span class="line">3x3 网格的正中间有一个障碍物。</span><br><span class="line">从左上角到右下角一共有 2 条不同的路径：</span><br><span class="line">1. 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line">2. 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：</p>
+<p>这其实和上面那个差不多，不过要注意的是，我们如果存在障碍物的话，那该<strong>障碍物通往小星星的路径条数应该为0</strong>，并且若<strong>边界上存在障碍物</strong>的话，障碍物之前的<strong>所有方格</strong>都无法到达<strong>小星星</strong>。</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(<span class="keyword">int</span>[][] obstacleGrid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = obstacleGrid.length;</span><br><span class="line">        <span class="keyword">int</span> n = obstacleGrid[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">if</span>( m == <span class="number">0</span> || n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        dp[m-<span class="number">1</span>][n-<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=m-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i-- )&#123;</span><br><span class="line">            <span class="keyword">if</span>( obstacleGrid[i][n-<span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                dp[i][n-<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=n-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i-- )&#123;</span><br><span class="line">            <span class="keyword">if</span>( obstacleGrid[m-<span class="number">1</span>][i] == <span class="number">0</span>)&#123;</span><br><span class="line">                dp[m-<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = m-<span class="number">2</span>;i &gt;= <span class="number">0</span>;i-- )&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = n-<span class="number">2</span>;j &gt;= <span class="number">0</span>;j-- )&#123;</span><br><span class="line">                <span class="keyword">if</span>( obstacleGrid[i][j] == <span class="number">1</span> )&#123;</span><br><span class="line">                    dp[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j] + dp[i][j+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/04/18/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%20I,II/" class="article-date">
+  <time class="dt-published" datetime="2020-04-18T17:56:24.954Z" itemprop="datePublished">2020-04-18</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/04/18/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】盛最多水的容器</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>人間が唯一偉大であるのは、自分を越えるものと闘うからである。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
