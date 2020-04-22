@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】二叉树的层次遍历、二叉树的右视图 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们知道，可以用BFS通过队列的方式对一颗二叉树进行层次遍历。 但是具体代码应该如何写，有哪些细节存在呢？我们今天就来好好探究一下这个问题。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;binary-tree-level-order-traversal&#x2F; 题目描叙：给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。 12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】二叉树的层次遍历、二叉树的右视图">
+<meta property="og:url" content="http://yoursite.com/2020/04/22/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="我们知道，可以用BFS通过队列的方式对一颗二叉树进行层次遍历。 但是具体代码应该如何写，有哪些细节存在呢？我们今天就来好好探究一下这个问题。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;binary-tree-level-order-traversal&#x2F; 题目描叙：给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。 12">
+<meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2020-04-22T14:49:01.139Z">
+<meta property="article:modified_time" content="2020-04-22T14:49:01.140Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】二叉树的层次遍历、二叉树的右视图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】二叉树的层次遍历、二叉树的右视图
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>我们知道，可以用BFS通过队列的方式对一颗二叉树进行层次遍历。</p>
+<p>但是具体代码应该如何写，有哪些细节存在呢？我们今天就来好好探究一下这个问题。</p>
+</blockquote>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-level-order-traversal/</a></p>
+<p><strong>题目描叙</strong>：给你一个二叉树，请你返回其按 <strong>层序遍历</strong> 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">二叉树：[3,9,20,null,null,15,7],</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  9  20</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   15   7</span><br><span class="line"></span><br><span class="line">返回其层次遍历结果：</span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：其实这个也没什么好分析的，这基本是大学数据结构必讲的内容。我们采用一个<strong>队列</strong>，每次进队<strong>一个节点</strong>，然后对他的左右子树进行<strong>非空</strong>判断，接着再进队其<strong>左右子树</strong>就好了。所以我们直接给出答案。</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>( root == <span class="keyword">null</span> ) <span class="keyword">return</span> list;</span><br><span class="line">        <span class="keyword">int</span> deepth = <span class="number">0</span>;</span><br><span class="line">        queue.add( root );</span><br><span class="line">        <span class="keyword">while</span>( !queue.isEmpty() )&#123;</span><br><span class="line">            <span class="keyword">int</span> curDeepth = queue.size();</span><br><span class="line">            list.add( <span class="keyword">new</span> ArrayList&lt;&gt;() );</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;curDeepth;i++ )&#123;</span><br><span class="line">                TreeNode temp = queue.peek();</span><br><span class="line">                list.get( deepth ).add( queue.remove().val );</span><br><span class="line">                <span class="keyword">if</span>( temp.left != <span class="keyword">null</span> ) queue.add(temp.left);</span><br><span class="line">                <span class="keyword">if</span>( temp.right != <span class="keyword">null</span> ) queue.add( temp.right );</span><br><span class="line">            &#125;</span><br><span class="line">            deepth ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>接下来，我们来看一道更有趣的题。这道题也应用了二叉树的层次遍历的特点。</p>
+</blockquote>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-right-side-view/</a></p>
+<p><strong>题目描叙</strong>：给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line"></span><br><span class="line">输入: [1,2,3,null,5,null,4]</span><br><span class="line">输出: [1, 3, 4]</span><br><span class="line">解释:</span><br><span class="line"></span><br><span class="line">   1            &lt;---</span><br><span class="line"> &#x2F;   \</span><br><span class="line">2     3         &lt;---</span><br><span class="line"> \     \</span><br><span class="line">  5     4       &lt;---</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：有没有发现，我们的右视图就是二叉树层次遍历，将每层最后一个节点加入List里。有了这样的思维我们很直接的就能想到，<strong>如果</strong>在循环时，队列的<strong>大小(size)-1</strong>等于<strong>局部变量i</strong>，那么我们就遍历到了该层的最后一个节点，直接添加进List里就好了。</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">rightSideView</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>( root == <span class="keyword">null</span> ) <span class="keyword">return</span> list;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add( root );</span><br><span class="line">        <span class="keyword">while</span>( !queue.isEmpty() )&#123;</span><br><span class="line">            <span class="keyword">int</span> size = queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">                TreeNode temp = queue.poll();</span><br><span class="line">                <span class="keyword">if</span>(temp.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    queue.add( temp.left );</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>( temp.right != <span class="keyword">null</span> )&#123;</span><br><span class="line">                    queue.add( temp.right );</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>( i == size-<span class="number">1</span> )&#123;</span><br><span class="line">                    list.add( temp.val );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/04/22/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/" class="article-date">
+  <time class="dt-published" datetime="2020-04-22T14:49:01.139Z" itemprop="datePublished">2020-04-22</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/04/19/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】岛屿数量</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>人間が唯一偉大であるのは、自分を越えるものと闘うからである。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
