@@ -13,7 +13,7 @@
 <meta property="og:description" content="AC了前三题，前三题几乎是拼手速。 第四题是状压dp，完全一点思路没有。  从去年开始直到现在，也刷了有这么多题，差不多每次双周赛都会参加(正常周赛因为时差问题没法参加)。基本上是个稳定三题选手。 刚开始做前三题的时候，感觉这次自己肯定能AK周赛，然后在欢天喜地花了40分钟写完前三题之后，来到了第四题。然后整个人都傻了 —— 说好的手速场呢？ 其实T2也WA了三次，主要是条件没能完善好。T3直接">
 <meta property="og:locale" content="cn">
 <meta property="article:published_time" content="2020-05-02T16:38:43.213Z">
-<meta property="article:modified_time" content="2020-05-02T17:11:19.000Z">
+<meta property="article:modified_time" content="2020-05-02T17:15:58.489Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
   
@@ -159,14 +159,14 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkIfCanBreak</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] c1 = s1.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] c2 = s2.toCharArray();</span><br><span class="line">        Arrays.sort(c1);</span><br><span class="line">        Arrays.sort(c2);</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; c1.length )&#123;</span><br><span class="line">            <span class="keyword">if</span>( c1[i] &gt;= c2[i] )&#123;</span><br><span class="line">                cnt1 ++;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( cnt1 == c1.length ) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; c1.length )&#123;</span><br><span class="line">            <span class="keyword">if</span>( c1[i] &lt;= c2[i] )&#123;</span><br><span class="line">                cnt2 ++;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( cnt2 == c2.length ) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<p>T4我是真的有点懵，当时想着是写回溯。但是用屁股想都知道会TLE。</p>
-<p>所以看群里大佬说可以用状压DP，但是有一说一我确实不会状压DP，还没学到那儿。</p>
+<p>T4我是真的有点懵，当时想着是写<strong>回溯</strong>。但是用屁股想都知道会TLE。</p>
+<p>所以看群里大佬说可以用<strong>状压DP</strong>，但是有一说一我确实不会状压DP，还没学到那儿。</p>
 <p>张晴川在GitHub上分享了关于DP的教学pdf，有闲心可以去看看。</p>
 <p>在这里也推荐下我的GitHub DP repo，主要是股票问题和背包问题。</p>
-<p>等明天起来再看看题解区大佬对T4怎么看。</p>
+<p>等明天起来再看看题解区大佬怎么解的T4。</p>
 <hr>
-<p>张晴川的DP Repo：[Atcoder Educational DP Contest Editorial —— QingChuan Zhang](<a href="https://github.com/SamZhangQingChuan/Editorials/blob/master/题解/比赛/Atcoder" target="_blank" rel="noopener">https://github.com/SamZhangQingChuan/Editorials/blob/master/题解/比赛/Atcoder</a> Educational DP Contest Editorial/Educational_DP_Contest_Editorial.pdf)</p>
-<p>我的DP Repo: <a href="https://github.com/mzdora/DynamicProgramming" target="_blank" rel="noopener">DynamicProgramming</a></p>
+<p>张晴川的DP Repo：<a href="https://github.com/SamZhangQingChuan/Editorials" target="_blank" rel="noopener">https://github.com/SamZhangQingChuan/Editorials</a></p>
+<p>我的DP Repo: <a href="https://github.com/mzdora/DynamicProgramming" target="_blank" rel="noopener">https://github.com/mzdora/DynamicProgramming</a></p>
 <p>LeetCodeT4题解区:<a href="https://leetcode-cn.com/problems/number-of-ways-to-wear-different-hats-to-each-other/solution/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/number-of-ways-to-wear-different-hats-to-each-other/solution/</a></p>
 
       
