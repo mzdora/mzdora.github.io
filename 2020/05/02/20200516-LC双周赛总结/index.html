@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Mzdora&#39;s">
 <meta property="og:description" content="基本AK了，T4在最后五分钟AC的，这次是边和对象聊天边打周赛。 等她再学学Python语法，以后打周赛她就负责读题，我负责写题。:D(想想就有点小快乐)  LeetCode周赛现在参加的人越来越多，尤其是大牛也越来越多了。 T1居然WA了两次，这是我没想到的，估计是第一次和对象连麦做题，有点紧张。T4是完全背包，直接套模板就行了，但是刚开始写的是dfs被T了一次。  T1:持续字符  题目链接">
 <meta property="og:locale" content="cn">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/05/16/test_sample_1.png">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/05/16/test_sample_2.png">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200516test_sample_1.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200516test_sample_2.png?raw=true">
 <meta property="article:published_time" content="2020-05-02T17:12:29.553Z">
-<meta property="article:modified_time" content="2020-05-16T19:29:07.025Z">
+<meta property="article:modified_time" content="2020-05-16T19:34:16.404Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/05/16/test_sample_1.png">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/20200516test_sample_1.png?raw=true">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -141,11 +141,11 @@
 <p>给你一棵根为 <code>root</code> 的二叉树，请你返回二叉树中好节点的数目。</p>
 <p>「好节点」X 定义为：从根到该节点 X 所经过的节点中，没有任何节点的值大于 X 的值。</p>
 <p><strong>示例 1：</strong></p>
-<p><strong><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/05/16/test_sample_1.png" alt="img"></strong></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/20200516test_sample_1.png?raw=true" alt="20200516test_sample_1.png"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [3,1,4,3,null,1,5]</span><br><span class="line">输出：4</span><br><span class="line">解释：图中蓝色节点为好节点。</span><br><span class="line">根节点 (3) 永远是个好节点。</span><br><span class="line">节点 4 -&gt; (3,4) 是路径中的最大值。</span><br><span class="line">节点 5 -&gt; (3,4,5) 是路径中的最大值。</span><br><span class="line">节点 3 -&gt; (3,1,3) 是路径中的最大值。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<p><strong><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/05/16/test_sample_2.png" alt="img"></strong></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/20200516test_sample_2.png?raw=true" alt="20200516test_sample_2.png"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [3,3,null,4,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：节点 2 -&gt; (3, 3, 2) 不是好节点，因为 &quot;3&quot; 比它大。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
