@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何设计UML图 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装 graphviz  graphviz 是个开源的图片渲染库。安装了这个库才能在 Windows 下实现把 PlantUML 脚本转换为图片。   安装jvav  在Vscode上安装 plantUML 插件    以@startuml开头，@enduml结尾 title表示标题 语句先后顺序存在影响 默认是 top to bottom direction(有时候改成 left to rig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何设计UML图">
+<meta property="og:url" content="http://yoursite.com/2020/06/16/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1UML%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="安装 graphviz  graphviz 是个开源的图片渲染库。安装了这个库才能在 Windows 下实现把 PlantUML 脚本转换为图片。   安装jvav  在Vscode上安装 plantUML 插件    以@startuml开头，@enduml结尾 title表示标题 语句先后顺序存在影响 默认是 top to bottom direction(有时候改成 left to rig">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200616uml.png?raw=true">
+<meta property="article:published_time" content="2020-06-15T23:20:13.261Z">
+<meta property="article:modified_time" content="2020-06-16T00:01:28.902Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/20200616uml.png?raw=true">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-如何设计UML图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      如何设计UML图
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <ul>
+<li><p>安装 <a href="https://link.jianshu.com/?t=http://graphviz.org/" target="_blank" rel="noopener">graphviz</a></p>
+<ul>
+<li>graphviz 是个开源的图片渲染库。安装了这个库才能在 Windows 下实现把 PlantUML 脚本转换为图片。</li>
+</ul>
+</li>
+<li><p>安装jvav</p>
+</li>
+<li><p>在Vscode上安装 plantUML 插件</p>
+</li>
+</ul>
+<hr>
+<p><strong>以@startuml开头，@enduml结尾</strong></p>
+<p><strong>title表示标题</strong></p>
+<p><strong>语句先后顺序存在影响</strong></p>
+<p><strong>默认是 top to bottom direction(有时候改成 left to right direction会好看一点)</strong></p>
+<p><strong>文件后缀是 .wsd</strong></p>
+<p>基本格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">title umlgraph</span><br><span class="line">语句blablabla...</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">title FunctionCalls</span><br><span class="line"></span><br><span class="line">Function : Int IntegerNum</span><br><span class="line">Function : Double DoubleNum</span><br><span class="line">Function : callFunction()</span><br><span class="line">Function : callAnotherFunction()</span><br><span class="line">Function : keepCall()</span><br><span class="line">Cat : String name</span><br><span class="line">Cat : Int year</span><br><span class="line">Cat : Meow()</span><br><span class="line">Function -&gt; Cat</span><br><span class="line">note left : cat is bad</span><br><span class="line">Function -&gt; Function: HelloWorld</span><br><span class="line">state CatSet&#123;</span><br><span class="line">    Cat -&gt; smallCat</span><br><span class="line">    Cat -&gt; midCat</span><br><span class="line">    Cat -&gt; bigCat</span><br><span class="line">&#125;</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+
+<p>会生成这样一个图:</p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/20200616uml.png?raw=true" alt="20200616uml.png"></p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/06/16/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1UML%E5%9B%BE/" class="article-date">
+  <time class="dt-published" datetime="2020-06-15T23:20:13.261Z" itemprop="datePublished">2020-06-16</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/05/27/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】字符串解码</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
