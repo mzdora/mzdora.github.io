@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20200621-LC周赛掉分场总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="T1:数组异或操作  给你两个整数，n 和 start 。 数组 nums 定义为：nums[i] &#x3D; start + 2*i（下标从 0 开始）且 n &#x3D;&#x3D; nums.length 。 请返回 nums 中所有元素按位异或（XOR）后得到的结果。 示例 1： 1234输入：n &#x3D; 5, start &#x3D; 0输出：8解释：数组 nums 为 [0, 2, 4, 6, 8]，其中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20200621-LC周赛掉分场总结">
+<meta property="og:url" content="http://yoursite.com/2020/06/21/20200621-LC%E5%91%A8%E8%B5%9B%E6%8E%89%E5%88%86%E5%9C%BA%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="T1:数组异或操作  给你两个整数，n 和 start 。 数组 nums 定义为：nums[i] &#x3D; start + 2*i（下标从 0 开始）且 n &#x3D;&#x3D; nums.length 。 请返回 nums 中所有元素按位异或（XOR）后得到的结果。 示例 1： 1234输入：n &#x3D; 5, start &#x3D; 0输出：8解释：数组 nums 为 [0, 2, 4, 6, 8]，其中">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-21T04:29:45.621Z">
+<meta property="article:modified_time" content="2020-06-21T04:32:40.579Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20200621-LC周赛掉分场总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20200621-LC周赛掉分场总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h3>T1:数组异或操作</h3>
+
+<p>给你两个整数，<code>n</code> 和 <code>start</code> 。</p>
+<p>数组 <code>nums</code> 定义为：<code>nums[i] = start + 2*i</code>（下标从 0 开始）且 <code>n == nums.length</code> 。</p>
+<p>请返回 <code>nums</code> 中所有元素按位异或（<strong>XOR</strong>）后得到的结果。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 5, start &#x3D; 0</span><br><span class="line">输出：8</span><br><span class="line">解释：数组 nums 为 [0, 2, 4, 6, 8]，其中 (0 ^ 2 ^ 4 ^ 6 ^ 8) &#x3D; 8 。</span><br><span class="line">     &quot;^&quot; 为按位异或 XOR 运算符。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 4, start &#x3D; 3</span><br><span class="line">输出：8</span><br><span class="line">解释：数组 nums 为 [3, 5, 7, 9]，其中 (3 ^ 5 ^ 7 ^ 9) &#x3D; 8.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1, start &#x3D; 7</span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 10, start &#x3D; 5</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1000</code></li>
+<li><code>0 &lt;= start &lt;= 1000</code></li>
+<li><code>n == nums.length</code></li>
+</ul>
+<p><strong>题目代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">xorOperation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            nums[i] = start + <span class="number">2</span>*i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            result ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3>T2:保证文件名唯一</h3>
+
+<p>给你一个长度为 <code>n</code> 的字符串数组 <code>names</code> 。你将会在文件系统中创建 <code>n</code> 个文件夹：在第 <code>i</code> 分钟，新建名为 <code>names[i]</code> 的文件夹。</p>
+<p>由于两个文件 <strong>不能</strong> 共享相同的文件名，因此如果新建文件夹使用的文件名已经被占用，系统会以 <code>(k)</code> 的形式为新文件夹的文件名添加后缀，其中 <code>k</code> 是能保证文件名唯一的 <strong>最小正整数</strong> 。</p>
+<p>返回长度为 <em><code>n</code></em> 的字符串数组，其中 <code>ans[i]</code> 是创建第 <code>i</code> 个文件夹时系统分配给该文件夹的实际名称。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;pes&quot;,&quot;fifa&quot;,&quot;gta&quot;,&quot;pes(2019)&quot;]</span><br><span class="line">输出：[&quot;pes&quot;,&quot;fifa&quot;,&quot;gta&quot;,&quot;pes(2019)&quot;]</span><br><span class="line">解释：文件系统将会这样创建文件名：</span><br><span class="line">&quot;pes&quot; --&gt; 之前未分配，仍为 &quot;pes&quot;</span><br><span class="line">&quot;fifa&quot; --&gt; 之前未分配，仍为 &quot;fifa&quot;</span><br><span class="line">&quot;gta&quot; --&gt; 之前未分配，仍为 &quot;gta&quot;</span><br><span class="line">&quot;pes(2019)&quot; --&gt; 之前未分配，仍为 &quot;pes(2019)&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;gta&quot;,&quot;gta(1)&quot;,&quot;gta&quot;,&quot;avalon&quot;]</span><br><span class="line">输出：[&quot;gta&quot;,&quot;gta(1)&quot;,&quot;gta(2)&quot;,&quot;avalon&quot;]</span><br><span class="line">解释：文件系统将会这样创建文件名：</span><br><span class="line">&quot;gta&quot; --&gt; 之前未分配，仍为 &quot;gta&quot;</span><br><span class="line">&quot;gta(1)&quot; --&gt; 之前未分配，仍为 &quot;gta(1)&quot;</span><br><span class="line">&quot;gta&quot; --&gt; 文件名被占用，系统为该名称添加后缀 (k)，由于 &quot;gta(1)&quot; 也被占用，所以 k &#x3D; 2 。实际创建的文件名为 &quot;gta(2)&quot; 。</span><br><span class="line">&quot;avalon&quot; --&gt; 之前未分配，仍为 &quot;avalon&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;onepiece&quot;,&quot;onepiece(1)&quot;,&quot;onepiece(2)&quot;,&quot;onepiece(3)&quot;,&quot;onepiece&quot;]</span><br><span class="line">输出：[&quot;onepiece&quot;,&quot;onepiece(1)&quot;,&quot;onepiece(2)&quot;,&quot;onepiece(3)&quot;,&quot;onepiece(4)&quot;]</span><br><span class="line">解释：当创建最后一个文件夹时，最小的正有效 k 为 4 ，文件名变为 &quot;onepiece(4)&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;wano&quot;,&quot;wano&quot;,&quot;wano&quot;,&quot;wano&quot;]</span><br><span class="line">输出：[&quot;wano&quot;,&quot;wano(1)&quot;,&quot;wano(2)&quot;,&quot;wano(3)&quot;]</span><br><span class="line">解释：每次创建文件夹 &quot;wano&quot; 时，只需增加后缀中 k 的值即可。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;kaido&quot;,&quot;kaido(1)&quot;,&quot;kaido&quot;,&quot;kaido(1)&quot;]</span><br><span class="line">输出：[&quot;kaido&quot;,&quot;kaido(1)&quot;,&quot;kaido(2)&quot;,&quot;kaido(1)(1)&quot;]</span><br><span class="line">解释：注意，如果含后缀文件名被占用，那么系统也会按规则在名称后添加新的后缀 (k) 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= names.length &lt;= 5 * 10^4</code></li>
+<li><code>1 &lt;= names[i].length &lt;= 20</code></li>
+<li><code>names[i]</code> 由小写英文字母、数字和/或圆括号组成。</li>
+</ul>
+<p><strong>题目分析:</strong></p>
+<p>这道题T了5次，他妈的我不知道这两份代码执行效率上有啥区别？？</p>
+<p>弱智玩意儿，就因为这个我在这道题上被卡了一个小时。</p>
+<p><strong>被T的版本：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String[] getFolderNames(String[] names) &#123;</span><br><span class="line">        HashMap&lt;String,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        String[] result = <span class="keyword">new</span> String[names.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( !map.containsKey(names[i]) )&#123;</span><br><span class="line">                result[i] = names[i];</span><br><span class="line">                map.put(names[i],<span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>( map.containsKey(names[i] + <span class="string">"("</span> + j + <span class="string">")"</span>) )&#123;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125;</span><br><span class="line">                result[i] = names[i] + <span class="string">"("</span> + map.get(names[i]) + <span class="string">")"</span>;</span><br><span class="line">                map.put(result[i],<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>AC的版本:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String[] getFolderNames(String[] names) &#123;</span><br><span class="line">        HashMap&lt;String,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        String[] result = <span class="keyword">new</span> String[names.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( !map.containsKey(names[i]) )&#123;</span><br><span class="line">                result[i] = names[i];</span><br><span class="line">                map.put(names[i],<span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">while</span>( map.containsKey(names[i] + <span class="string">"("</span> + map.get(names[i]) + <span class="string">")"</span>) )&#123;</span><br><span class="line">                    map.put(names[i],map.get(names[i])+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                result[i] = names[i] + <span class="string">"("</span> + map.get(names[i]) + <span class="string">")"</span>;</span><br><span class="line">                map.put(result[i],<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3>T3:避免洪水泛滥</h3>
+
+<p>你的国家有无数个湖泊，所有湖泊一开始都是空的。当第 <code>n</code> 个湖泊下雨的时候，如果第 <code>n</code> 个湖泊是空的，那么它就会装满水，否则这个湖泊会发生洪水。你的目标是避免任意一个湖泊发生洪水。</p>
+<p>给你一个整数数组 <code>rains</code> ，其中：</p>
+<ul>
+<li><code>rains[i] &gt; 0</code> 表示第 <code>i</code> 天时，第 <code>rains[i]</code> 个湖泊会下雨。</li>
+<li><code>rains[i] == 0</code> 表示第 <code>i</code> 天没有湖泊会下雨，你可以选择 <strong>一个</strong> 湖泊并 <strong>抽干</strong> 这个湖泊的水。</li>
+</ul>
+<p>请返回一个数组 <code>ans</code> ，满足：</p>
+<ul>
+<li><code>ans.length == rains.length</code></li>
+<li>如果 <code>rains[i] &gt; 0</code> ，那么<code>ans[i] == -1</code> 。</li>
+<li>如果 <code>rains[i] == 0</code> ，<code>ans[i]</code> 是你第 <code>i</code> 天选择抽干的湖泊。</li>
+</ul>
+<p>如果有多种可行解，请返回它们中的 <strong>任意一个</strong> 。如果没办法阻止洪水，请返回一个 <strong>空的数组</strong> 。</p>
+<p>请注意，如果你选择抽干一个装满水的湖泊，它会变成一个空的湖泊。但如果你选择抽干一个空的湖泊，那么将无事发生（详情请看示例 4）。</p>
+<p> <strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [1,2,3,4]</span><br><span class="line">输出：[-1,-1,-1,-1]</span><br><span class="line">解释：第一天后，装满水的湖泊包括 [1]</span><br><span class="line">第二天后，装满水的湖泊包括 [1,2]</span><br><span class="line">第三天后，装满水的湖泊包括 [1,2,3]</span><br><span class="line">第四天后，装满水的湖泊包括 [1,2,3,4]</span><br><span class="line">没有哪一天你可以抽干任何湖泊的水，也没有湖泊会发生洪水。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [1,2,0,0,2,1]</span><br><span class="line">输出：[-1,-1,2,1,-1,-1]</span><br><span class="line">解释：第一天后，装满水的湖泊包括 [1]</span><br><span class="line">第二天后，装满水的湖泊包括 [1,2]</span><br><span class="line">第三天后，我们抽干湖泊 2 。所以剩下装满水的湖泊包括 [1]</span><br><span class="line">第四天后，我们抽干湖泊 1 。所以暂时没有装满水的湖泊了。</span><br><span class="line">第五天后，装满水的湖泊包括 [2]。</span><br><span class="line">第六天后，装满水的湖泊包括 [1,2]。</span><br><span class="line">可以看出，这个方案下不会有洪水发生。同时， [-1,-1,1,2,-1,-1] 也是另一个可行的没有洪水的方案。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [1,2,0,1,2]</span><br><span class="line">输出：[]</span><br><span class="line">解释：第二天后，装满水的湖泊包括 [1,2]。我们可以在第三天抽干一个湖泊的水。</span><br><span class="line">但第三天后，湖泊 1 和 2 都会再次下雨，所以不管我们第三天抽干哪个湖泊的水，另一个湖泊都会发生洪水。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [69,0,0,0,69]</span><br><span class="line">输出：[-1,69,1,1,-1]</span><br><span class="line">解释：任何形如 [-1,69,x,y,-1], [-1,x,69,y,-1] 或者 [-1,x,y,69,-1] 都是可行的解，其中 1 &lt;&#x3D; x,y &lt;&#x3D; 10^9</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [10,20,20]</span><br><span class="line">输出：[]</span><br><span class="line">解释：由于湖泊 20 会连续下 2 天的雨，所以没有没有办法阻止洪水。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= rains.length &lt;= 10^5</code></li>
+<li><code>0 &lt;= rains[i] &lt;= 10^9</code></li>
+</ul>
+<p><strong>题目分析:</strong></p>
+<p>直接遍历，遇到下雨天就判断湖里的水是否是满的，如果是再判断能否先把水放掉。</p>
+<h3>T4:找到最小生成树里的关键边和伪关键边</h3>
+
+<p>放弃</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/06/21/20200621-LC%E5%91%A8%E8%B5%9B%E6%8E%89%E5%88%86%E5%9C%BA%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-06-21T04:29:45.621Z" itemprop="datePublished">2020-06-21</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/06/16/20200613-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20200613-LC双周赛总结</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
