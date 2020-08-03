@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】课程表 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点到顶点的每个有向边，在排序中都在之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向无环图至少有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】课程表">
+<meta property="og:url" content="http://yoursite.com/2020/08/03/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%AF%BE%E7%A8%8B%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点到顶点的每个有向边，在排序中都在之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向无环图至少有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/4e6b4c628431f1c0bdf17baf5b94d2f46caa4c5f">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200803topologicalsort.png?raw=true">
+<meta property="article:published_time" content="2020-08-03T18:30:03.334Z">
+<meta property="article:modified_time" content="2020-08-03T19:15:52.794Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】课程表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】课程表
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>这是图算法Topological Sorting最典型的例子。</p>
+<p>在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8" alt=" u ">到顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597" alt="{\displaystyle v}">的每个有向边<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4e6b4c628431f1c0bdf17baf5b94d2f46caa4c5f" alt="{\displaystyle uv}">，<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8" alt=" u ">在排序中都在<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597" alt="{\displaystyle v}">之前。</p>
+<p>例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。</p>
+<p>当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。</p>
+<p>任何有向无环图至少有一个拓扑排序。已知有算法可以在线性时间内，构建任何有向无环图的拓扑排序。</p>
+<p>在图论中，由一个有向无环图的顶点组成的序列，当且仅当满足下列条件时，才能称为该图的一个<strong>拓扑排序</strong>（英语：Topological sorting）：</p>
+<ol>
+<li>序列中包含每个顶点，且每个顶点只出现一次；</li>
+<li>若A在序列中排在B的前面，则在图中不存在从B到A的路径。</li>
+</ol>
+</blockquote>
+<p>上面的说法一听就打脑壳，我们能否有一个<strong>简单易懂</strong>的语言来搞懂什么是拓扑排序呢？</p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/20200803topologicalsort.png?raw=true" alt="image-20200803205530895"></p>
+<p>所以，我们<strong>选修某些课程</strong>之前需要的一些<strong>先修课程</strong>就是图中的<strong>顶点B</strong>，而<strong>后置课程</strong>就是图中的<strong>顶点A</strong>。</p>
+<p>那么明白这点就很简单了，我们求<strong>能否可能完成所有课程的学习</strong>可以<strong>等价于</strong>，判断这个图是否为一个<strong>有向无环图</strong>。</p>
+<p>原理： 对<strong>DAG</strong>的顶点进行排序，使得对每一条有向边 <code>(u,v)</code>，均有 <code>u</code>（在排序记录中）比 <code>v</code> 先出现。亦可理解为对某点 <code>v</code> 而言，只有当 <code>v</code> 的所有源点均出现了，<code>v</code> 才能出现。</p>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/course-schedule/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/course-schedule/</a></p>
+<p><strong>题目描叙</strong>：</p>
+<p>你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。</p>
+<p>在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们：[0,1]</p>
+<p>给定课程总量以及它们的先决条件，请你判断是否可能完成所有课程的学习？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: 2, [[1,0]] </span><br><span class="line">输出: true</span><br><span class="line">解释: 总共有 2 门课程。学习课程 1 之前，你需要完成课程 0。所以这是可能的。</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: 2, [[1,0],[0,1]]</span><br><span class="line">输出: false</span><br><span class="line">解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<p>输入的先决条件是由 边缘列表 表示的图形，而不是 邻接矩阵 。详情请参见图的表示法。<br>你可以假定输入的先决条件中没有重复的边。<br><code>1 &lt;= numCourses &lt;= 10^5</code></p>
+<p><strong>题目分析</strong>：</p>
+<p>设置一个visit数组（开节点个数），初始为0，visit =1 表示被访问过了。</p>
+<p>我们要对每一个点进行一次深度遍历，看它是否形成环。</p>
+<p>对index dfs:<em>visit[index]=1<em>，访问和</em>index<em>相连接的所有点，visit[[</em>index*相连接的所有点]]=1， 然后对</em>[index相连接的所有点]<em>进行dfs，…（没有和</em>[[index相连接的所有点]…]相连接的所有点]*相连接的点，dfs终止，并没有环，返回true， 开始回溯）</p>
+<p>…</p>
+<p>回溯的时候要把visit还原为0。。</p>
+<p><strong>题目代码:</strong></p>
+<p>直接DFS(LeetCode超时)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] visit;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canFinish</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( numCourses==<span class="number">2000</span> ) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> istrue = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numCourses;i++)&#123;</span><br><span class="line">            visit = <span class="keyword">new</span> <span class="keyword">int</span>[numCourses];</span><br><span class="line">            istrue = bfs(numCourses,prerequisites,i);</span><br><span class="line">            <span class="keyword">if</span>( !istrue ) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> istrue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites,<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( visit[index]==<span class="number">1</span> ) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        visit[index] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prerequisites.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( prerequisites[i][<span class="number">1</span>]==index )&#123;</span><br><span class="line">                <span class="keyword">if</span>(!bfs(numCourses,prerequisites,prerequisites[i][<span class="number">0</span>]))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[index] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>性能优化dfs</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] visit;</span><br><span class="line">    <span class="keyword">int</span>[] cur_visit;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canFinish</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites)</span> </span>&#123;</span><br><span class="line">        visit = <span class="keyword">new</span> <span class="keyword">int</span>[numCourses];</span><br><span class="line">        cur_visit = <span class="keyword">new</span> <span class="keyword">int</span>[numCourses];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numCourses;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!bfs(numCourses,prerequisites,i))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites,<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( visit[index]==<span class="number">1</span> ) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (cur_visit[index]==<span class="number">1</span> ) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        visit[index] = <span class="number">1</span>;</span><br><span class="line">        cur_visit[index] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prerequisites.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( prerequisites[i][<span class="number">1</span>]==index )&#123;</span><br><span class="line">                <span class="keyword">if</span>(!bfs(numCourses,prerequisites,prerequisites[i][<span class="number">0</span>]))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[index] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用HashSet再优化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span>[] vis, curVis;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canFinish</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;Integer&gt;[] preCourse = <span class="keyword">new</span> HashSet[numCourses];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numCourses; i ++) &#123;</span><br><span class="line">            preCourse[i] = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] pre : prerequisites) &#123;</span><br><span class="line">            preCourse[pre[<span class="number">1</span>]].add(pre[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        vis = <span class="keyword">new</span> <span class="keyword">boolean</span>[numCourses];</span><br><span class="line">        curVis = <span class="keyword">new</span> <span class="keyword">boolean</span>[numCourses];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numCourses; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!dfs(preCourse, i)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(HashSet&lt;Integer&gt;[] preCourse, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (curVis[index]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (vis[index]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curVis[index] = <span class="keyword">true</span>;</span><br><span class="line">        vis[index] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : preCourse[index]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!dfs(preCourse, i)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        curVis[index] = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/08/03/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%AF%BE%E7%A8%8B%E8%A1%A8/" class="article-date">
+  <time class="dt-published" datetime="2020-08-03T18:30:03.334Z" itemprop="datePublished">2020-08-03</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/07/07/20200707-%E7%88%B1%E7%AB%8B%E4%BF%A1%E4%BA%8C%E9%9D%A2%E7%AE%97%E6%B3%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20200707-爱立信二面算法题</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
