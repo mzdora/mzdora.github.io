@@ -5,24 +5,19 @@
   
   <title>【LeetCode题解】课程表 | Mzdora&#39;s</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点到顶点的每个有向边，在排序中都在之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向无环图至少有">
+  <meta name="description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点u到顶点v的每个有向边uv，u在排序中都在u之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【LeetCode题解】课程表">
 <meta property="og:url" content="http://yoursite.com/2020/08/03/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%AF%BE%E7%A8%8B%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Mzdora&#39;s">
-<meta property="og:description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点到顶点的每个有向边，在排序中都在之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向无环图至少有">
+<meta property="og:description" content="这是图算法Topological Sorting最典型的例子。 在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点u到顶点v的每个有向边uv，u在排序中都在u之前。 例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。 当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。 任何有向">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
-<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597">
-<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/4e6b4c628431f1c0bdf17baf5b94d2f46caa4c5f">
-<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
-<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597">
 <meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200803topologicalsort.png?raw=true">
 <meta property="article:published_time" content="2020-08-03T18:30:03.334Z">
-<meta property="article:modified_time" content="2020-08-03T19:15:52.794Z">
+<meta property="article:modified_time" content="2020-08-03T19:18:35.781Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/20200803topologicalsort.png?raw=true">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -97,7 +92,7 @@
       
         <blockquote>
 <p>这是图算法Topological Sorting最典型的例子。</p>
-<p>在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8" alt=" u ">到顶点<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597" alt="{\displaystyle v}">的每个有向边<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4e6b4c628431f1c0bdf17baf5b94d2f46caa4c5f" alt="{\displaystyle uv}">，<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3e6bb763d22c20916ed4f0bb6bd49d7470cffd8" alt=" u ">在排序中都在<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597" alt="{\displaystyle v}">之前。</p>
+<p>在计算机科学领域，有向图的拓扑排序是其顶点的线性排序，使得对于从顶点<strong>u</strong>到顶点<strong>v</strong>的每个有向边<strong>uv</strong>，<strong>u</strong>在排序中都在<strong>u</strong>之前。</p>
 <p>例如，图形的顶点可以表示要执行的任务，并且边可以表示一个任务必须在另一个任务之前执行的约束；在这个应用中，拓扑排序只是一个有效的任务顺序。</p>
 <p>当且仅当图中没有定向环时（即有向无环图)，才有可能进行拓扑排序。</p>
 <p>任何有向无环图至少有一个拓扑排序。已知有算法可以在线性时间内，构建任何有向无环图的拓扑排序。</p>
