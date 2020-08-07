@@ -13,7 +13,7 @@
 <meta property="og:description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖  创建核心配置文件  创建实体(Entity)类  创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-07T03:58:31.250Z">
-<meta property="article:modified_time" content="2020-08-07T23:14:20.746Z">
+<meta property="article:modified_time" content="2020-08-07T23:17:01.090Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
   
@@ -151,7 +151,7 @@
 <li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mapper.xml" target="_blank" rel="noopener">mapper.xml</a> (直接拿来用),namespace要和DAO层的Interface名称一致。</li>
 </ul>
 </li>
-<li><p>编写<select> SQL标签(mapper.xml)</p>
+<li><p>编写 select SQL标签(mapper.xml)</p>
 <ul>
 <li>在mapper中写查询语句</li>
 </ul>
@@ -159,7 +159,7 @@
 <li><p>开启驼峰命名映射(mybatis-config.xml)</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"mapUnderscoreToCamelCase"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在MyBatis-Config中添加<mapper>声明</p>
+<li><p>在MyBatis-Config中添加 mapper 声明</p>
 </li>
 <li><p>在SqlSession执行SQL</p>
 </li>
