@@ -12,17 +12,17 @@
 <meta property="og:site_name" content="Mzdora&#39;s">
 <meta property="og:description" content="MyBatis从入门到入土(3)1.日志管理 导个包就可以用了 12345&lt;dependency&gt;    &lt;groupId&gt;ch.qos.logback&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;logback-classic&lt;&#x2F;artifactId&gt;    &lt;version&gt;1.2.3&lt;&#x2F;version&gt;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200810063315025.png">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811135431057.png">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811161009758.png">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811163536306.png">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811165804718.png">
-<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200812075424790.png">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200810063315025.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200811135431057.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200811161009758.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200811163536306.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200811165804718.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200812075424790.png?raw=true">
 <meta property="article:published_time" content="2020-08-10T05:30:54.497Z">
-<meta property="article:modified_time" content="2020-08-12T06:31:54.742Z">
+<meta property="article:modified_time" content="2020-08-12T06:39:40.113Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200810063315025.png">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/20200810063315025.png?raw=true">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -95,7 +95,7 @@
     
     <div class="e-content article-entry typo" itemprop="articleBody">
       
-        <h2 id="MyBatis从入门到入土-3"><a href="#MyBatis从入门到入土-3" class="headerlink" title="MyBatis从入门到入土(3)"></a>MyBatis从入门到入土(3)</h2><h2 id="1-日志管理"><a href="#1-日志管理" class="headerlink" title="1.日志管理"></a>1.日志管理</h2><p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200810063315025.png" alt=""></p>
+        <h2 id="MyBatis从入门到入土-3"><a href="#MyBatis从入门到入土-3" class="headerlink" title="MyBatis从入门到入土(3)"></a>MyBatis从入门到入土(3)</h2><h2 id="1-日志管理"><a href="#1-日志管理" class="headerlink" title="1.日志管理"></a>1.日志管理</h2><p><img src="https://github.com/mzdora/photobed/blob/master/20200810063315025.png?raw=true" alt="20200810063315025.png"></p>
 <p>导个包就可以用了</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -111,7 +111,7 @@
 
 <h2 id="3-MyBatis中的缓存设计"><a href="#3-MyBatis中的缓存设计" class="headerlink" title="3.MyBatis中的缓存设计"></a>3.MyBatis中的缓存设计</h2><p>一级缓存默认开启，缓存范围SqlSession会话</p>
 <p>二级缓存手动开启，属于范围Mapper Namespace</p>
-<p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811135431057.png" alt="image-20200811135431057"></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200811135431057.png?raw=true" alt="image-20200811135431057.png"></p>
 <p>二级缓存运行原则:</p>
 <ol>
 <li>二级缓存开启后默认所有查询操作均使用缓存</li>
@@ -138,8 +138,8 @@
 <p>readOnly 是缓存是否只读</p>
 </blockquote>
 <h2 id="4-多表级联查询"><a href="#4-多表级联查询" class="headerlink" title="4.多表级联查询"></a>4.多表级联查询</h2><p>是指通过一个对象来获取与它关联的另外一个对象</p>
-<p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811161009758.png" alt="image-20200811161009758"></p>
-<h2 id="5-分页查询"><a href="#5-分页查询" class="headerlink" title="5.分页查询"></a>5.分页查询</h2><p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811163536306.png" alt="image-20200811163536306"></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200811161009758.png?raw=true" alt="image-20200811161009758.png"></p>
+<h2 id="5-分页查询"><a href="#5-分页查询" class="headerlink" title="5.分页查询"></a>5.分页查询</h2><p><img src="https://github.com/mzdora/photobed/blob/master/image-20200811163536306.png?raw=true" alt="image-20200811163536306.png"></p>
 <ul>
 <li>当前页数数据查询 - SELECT * FROM tab limit 0,1</li>
 <li>总记录数查询 - SELECT count(*) FROM tab</li>
@@ -159,8 +159,8 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">"com.github.pagehelper.PageInterceptor"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"helperDialect"</span> <span class="attr">value</span>=<span class="string">"mysql"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"reasonable"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>接着</p>
-<p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200811165804718.png" alt="image-20200811165804718"></p>
-<h2 id="6-使用注解开发"><a href="#6-使用注解开发" class="headerlink" title="6.使用注解开发"></a>6.使用注解开发</h2><p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200812075424790.png" alt="image-20200812075424790"></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200811165804718.png?raw=true" alt="image-20200811165804718.png"></p>
+<h2 id="6-使用注解开发"><a href="#6-使用注解开发" class="headerlink" title="6.使用注解开发"></a>6.使用注解开发</h2><p><img src="https://github.com/mzdora/photobed/blob/master/image-20200812075424790.png?raw=true" alt="image-20200812075424790.png"></p>
 <p>把书写在xml文件里的东西，放在java interface文件里。</p>
 <ol>
 <li><p>首先咋们需要建一个Interface DAO类</p>
