@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20200822-LC双周赛保分场总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="T1.千位分隔数给你一个整数 n，请你每隔三位添加点（即 “.” 符号）作为千位分隔符，并将结果以字符串格式返回。 示例 1： 12输入：n &#x3D; 987输出：&quot;987&quot;  示例 2： 12输入：n &#x3D; 1234输出：&quot;1.234&quot;  示例 3： 12输入：n &#x3D; 123456789输出：&quot;123.456.789&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20200822-LC双周赛保分场总结">
+<meta property="og:url" content="http://yoursite.com/2020/08/22/20200822-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E4%BF%9D%E5%88%86%E5%9C%BA%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="T1.千位分隔数给你一个整数 n，请你每隔三位添加点（即 “.” 符号）作为千位分隔符，并将结果以字符串格式返回。 示例 1： 12输入：n &#x3D; 987输出：&quot;987&quot;  示例 2： 12输入：n &#x3D; 1234输出：&quot;1.234&quot;  示例 3： 12输入：n &#x3D; 123456789输出：&quot;123.456.789&amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5480e1.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5480e2.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/07/10/sample_2_1887.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e1.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e2.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e3.png">
+<meta property="article:published_time" content="2020-08-22T16:19:08.324Z">
+<meta property="article:modified_time" content="2020-08-22T16:29:44.643Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5480e1.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20200822-LC双周赛保分场总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20200822-LC双周赛保分场总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h2 id="T1-千位分隔数"><a href="#T1-千位分隔数" class="headerlink" title="T1.千位分隔数"></a>T1.千位分隔数</h2><p>给你一个整数 <code>n</code>，请你每隔三位添加点（即 “.” 符号）作为千位分隔符，并将结果以字符串格式返回。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 987</span><br><span class="line">输出：&quot;987&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1234</span><br><span class="line">输出：&quot;1.234&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 123456789</span><br><span class="line">输出：&quot;123.456.789&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 0</span><br><span class="line">输出：&quot;0&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= n &lt; 2^31</code></li>
+</ul>
+<p><strong>分析:</strong></p>
+<p>用StringBuilder给字符串加点就行了，非常简单，不需要脑袋。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">thousandSeparator</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        String str = Integer.toString(n);</span><br><span class="line">        StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=str.length()-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cnt%<span class="number">3</span>==<span class="number">0</span> &amp;&amp; cnt != <span class="number">0</span>) res.append(<span class="string">"."</span>);</span><br><span class="line">            cnt++;</span><br><span class="line">            res.append(str.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        res.reverse();</span><br><span class="line">        <span class="keyword">return</span> res.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="T2-可以到达所有点的最少点数目"><a href="#T2-可以到达所有点的最少点数目" class="headerlink" title="T2.可以到达所有点的最少点数目"></a>T2.可以到达所有点的最少点数目</h2><p>给你一个 <strong>有向无环图</strong> ， <code>n</code> 个节点编号为 <code>0</code> 到 <code>n-1</code> ，以及一个边数组 <code>edges</code> ，其中 <code>edges[i] = [fromi, toi]</code> 表示一条从点 <code>fromi</code> 到点 <code>toi</code> 的有向边。</p>
+<p>找到最小的点集使得从这些点出发能到达图中所有点。题目保证解存在且唯一。</p>
+<p>你可以以任意顺序返回这些节点编号。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5480e1.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 6, edges &#x3D; [[0,1],[0,2],[2,5],[3,4],[4,2]]</span><br><span class="line">输出：[0,3]</span><br><span class="line">解释：从单个节点出发无法到达所有节点。从 0 出发我们可以到达 [0,1,2,5] 。从 3 出发我们可以到达 [3,4,2,5] 。所以我们输出 [0,3] 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5480e2.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 5, edges &#x3D; [[0,1],[2,1],[3,1],[1,4],[2,4]]</span><br><span class="line">输出：[0,2,3]</span><br><span class="line">解释：注意到节点 0，3 和 2 无法从其他节点到达，所以我们必须将它们包含在结果点集中，这些点都能到达节点 1 和 4 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= n &lt;= 10^5</code></li>
+<li><code>1 &lt;= edges.length &lt;= min(10^5, n * (n - 1) / 2)</code></li>
+<li><code>edges[i].length == 2</code></li>
+<li><code>0 &lt;= fromi, toi &lt; n</code></li>
+<li>所有点对 <code>(fromi, toi)</code> 互不相同。</li>
+</ul>
+<p><strong>分析:</strong></p>
+<p>检查入度为0的节点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findSmallestSetOfVertices</span><span class="params">(<span class="keyword">int</span> n, List&lt;List&lt;Integer&gt;&gt; edges)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            set.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;edges.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(set.contains(edges.get(i).get(<span class="number">1</span>)))&#123;</span><br><span class="line">                set.remove(edges.get(i).get(<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> value: set)&#123;</span><br><span class="line">            result.add(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="T3-得到目标数组的最少函数调用次数"><a href="#T3-得到目标数组的最少函数调用次数" class="headerlink" title="T3.得到目标数组的最少函数调用次数"></a>T3.得到目标数组的最少函数调用次数</h2><p><img src="https://assets.leetcode.com/uploads/2020/07/10/sample_2_1887.png" alt="img"></p>
+<p>给你一个与 <code>nums</code> 大小相同且初始值全为 0 的数组 <code>arr</code> ，请你调用以上函数得到整数数组 <code>nums</code> 。</p>
+<p>请你返回将 <code>arr</code> 变成 <code>nums</code> 的最少函数调用次数。</p>
+<p>答案保证在 32 位有符号整数以内。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,5]</span><br><span class="line">输出：5</span><br><span class="line">解释：给第二个数加 1 ：[0, 0] 变成 [0, 1] （1 次操作）。</span><br><span class="line">将所有数字乘以 2 ：[0, 1] -&gt; [0, 2] -&gt; [0, 4] （2 次操作）。</span><br><span class="line">给两个数字都加 1 ：[0, 4] -&gt; [1, 4] -&gt; [1, 5] （2 次操作）。</span><br><span class="line">总操作次数为：1 + 2 + 2 &#x3D; 5 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [2,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：给两个数字都加 1 ：[0, 0] -&gt; [0, 1] -&gt; [1, 1] （2 次操作）。</span><br><span class="line">将所有数字乘以 2 ： [1, 1] -&gt; [2, 2] （1 次操作）。</span><br><span class="line">总操作次数为： 2 + 1 &#x3D; 3 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [4,2,5]</span><br><span class="line">输出：6</span><br><span class="line">解释：（初始）[0,0,0] -&gt; [1,0,0] -&gt; [1,0,1] -&gt; [2,0,2] -&gt; [2,1,2] -&gt; [4,2,4] -&gt; [4,2,5] （nums 数组）。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [3,2,2,4]</span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [2,4,8,16]</span><br><span class="line">输出：8</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10^5</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 10^9</code></li>
+</ul>
+<p><strong>分析:</strong></p>
+<p>反向思考，从满数组开始。如果是奇数就累减，如果全是偶数就直接除二。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minOperations</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!isClear(nums))&#123;</span><br><span class="line">            <span class="keyword">boolean</span> noJi = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>( nums[i]%<span class="number">2</span>==<span class="number">1</span> )&#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                    nums[i]--;</span><br><span class="line">                    noJi = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( noJi )&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;nums.length;j++)&#123;</span><br><span class="line">                    nums[j]/=<span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isClear</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]!=<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="T4-二维网格图中探测环"><a href="#T4-二维网格图中探测环" class="headerlink" title="T4.二维网格图中探测环"></a>T4.二维网格图中探测环</h2><p>给你一个二维字符网格数组 <code>grid</code> ，大小为 <code>m x n</code> ，你需要检查 <code>grid</code> 中是否存在 <strong>相同值</strong> 形成的环。</p>
+<p>一个环是一条开始和结束于同一个格子的长度 <strong>大于等于 4</strong> 的路径。对于一个给定的格子，你可以移动到它上、下、左、右四个方向相邻的格子之一，可以移动的前提是这两个格子有 <strong>相同的值</strong> 。</p>
+<p>同时，你也不能回到上一次移动时所在的格子。比方说，环 <code>(1, 1) -&gt; (1, 2) -&gt; (1, 1)</code> 是不合法的，因为从 <code>(1, 2)</code> 移动到 <code>(1, 1)</code> 回到了上一次移动时的格子。</p>
+<p>如果 <code>grid</code> 中有相同值形成的环，请你返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e1.png" alt="img"></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：grid &#x3D; [[&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;a&quot;],[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;a&quot;],[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;a&quot;],[&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;a&quot;]]</span><br><span class="line">输出：true</span><br><span class="line">解释：如下图所示，有 2 个用不同颜色标出来的环：</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><strong><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e2.png" alt="img"></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：grid &#x3D; [[&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;a&quot;],[&quot;c&quot;,&quot;d&quot;,&quot;c&quot;,&quot;c&quot;],[&quot;c&quot;,&quot;c&quot;,&quot;e&quot;,&quot;c&quot;],[&quot;f&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]]</span><br><span class="line">输出：true</span><br><span class="line">解释：如下图所示，只有高亮所示的一个合法环：</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><strong><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/08/22/5482e3.png" alt="img"></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：grid &#x3D; [[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;],[&quot;b&quot;,&quot;z&quot;,&quot;b&quot;],[&quot;b&quot;,&quot;b&quot;,&quot;a&quot;]]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == grid.length</code></li>
+<li><code>n == grid[i].length</code></li>
+<li><code>1 &lt;= m &lt;= 500</code></li>
+<li><code>1 &lt;= n &lt;= 500</code></li>
+<li><code>grid</code> 只包含小写英文字母。</li>
+</ul>
+<p><strong>分析:</strong></p>
+<p>直接DFS就完事了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsCycle</span><span class="params">(<span class="keyword">char</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (grid == <span class="keyword">null</span> || grid.length == <span class="number">0</span> || grid[<span class="number">0</span>].length == <span class="number">0</span>) &#123; <span class="keyword">return</span> <span class="keyword">false</span>; &#125;</span><br><span class="line">        <span class="keyword">boolean</span>[][] checked = <span class="keyword">new</span> <span class="keyword">boolean</span>[grid.length][grid[<span class="number">0</span>].length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[i].length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (checked[i][j]) &#123; <span class="keyword">continue</span>; &#125;</span><br><span class="line">                <span class="keyword">if</span> (dfs(grid, i, j, -<span class="number">1</span>, -<span class="number">1</span>, grid[i][j], checked)) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] grid, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> lastRow, <span class="keyword">int</span> lastCol, <span class="keyword">char</span> ch, <span class="keyword">boolean</span>[][] checked)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (row &lt; <span class="number">0</span> || col &lt; <span class="number">0</span> || row &gt;= grid.length || col &gt;= grid[row].length || grid[row][col] != ch) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (checked[row][col]) &#123; <span class="keyword">return</span> <span class="keyword">true</span>; &#125;</span><br><span class="line"></span><br><span class="line">        checked[row][col] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span>[] rowBias = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] colBias = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowBias.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> nextRow = row + rowBias[i];</span><br><span class="line">            <span class="keyword">int</span> nextCol = col + colBias[i];</span><br><span class="line">            <span class="keyword">if</span> (nextRow == lastRow &amp;&amp; nextCol == lastCol) &#123; <span class="keyword">continue</span>; &#125;</span><br><span class="line">            <span class="keyword">if</span> (dfs(grid, nextRow, nextCol, row, col, ch, checked)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/08/22/20200822-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E4%BF%9D%E5%88%86%E5%9C%BA%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-08-22T16:19:08.324Z" itemprop="datePublished">2020-08-22</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/08/19/Spring%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F(4)/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring从入门到入坟(4)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
