@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring从入门到入坟(3) | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.AOP的概述什么是AOP面向切面编程，是OOP的延续。利用AOP可以对业务逻辑的各个部分进行隔离。 AOP采用了横向抽取机制，取代了传统纵向继承体系重复性代码(性能监视、事务管理、安全检查、缓存) AOP使用纯Java实现，不需要专门的编译过程和类加载器，在运行期间通过代理的方式向目标类置入增强代码。   AOP的术语Joinpoint(连接点):所谓连接点是指那些被拦截到的点。在Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring从入门到入坟(3)">
+<meta property="og:url" content="http://yoursite.com/2020/09/30/Spring%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F(3)/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="1.AOP的概述什么是AOP面向切面编程，是OOP的延续。利用AOP可以对业务逻辑的各个部分进行隔离。 AOP采用了横向抽取机制，取代了传统纵向继承体系重复性代码(性能监视、事务管理、安全检查、缓存) AOP使用纯Java实现，不需要专门的编译过程和类加载器，在运行期间通过代理的方式向目标类置入增强代码。   AOP的术语Joinpoint(连接点):所谓连接点是指那些被拦截到的点。在Spring">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200817072859091.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200817072928049.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200817074808148.png?raw=true">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/image-20200818022612355.png?raw=true">
+<meta property="article:published_time" content="2020-09-30T15:07:19.734Z">
+<meta property="article:modified_time" content="2020-08-19T03:35:54.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/image-20200817072859091.png?raw=true">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-Spring从入门到入坟(3)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spring从入门到入坟(3)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h2 id="1-AOP的概述"><a href="#1-AOP的概述" class="headerlink" title="1.AOP的概述"></a>1.AOP的概述</h2><h3 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h3><p>面向切面编程，是OOP的延续。利用AOP可以对业务逻辑的各个部分进行隔离。</p>
+<p>AOP采用了横向抽取机制，取代了传统纵向继承体系重复性代码(性能监视、事务管理、安全检查、缓存)</p>
+<p>AOP使用纯Java实现，不需要专门的编译过程和类加载器，在运行期间通过代理的方式向目标类置入增强代码。</p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200817072859091.png?raw=true" alt="image-20200817072859091"></p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200817072928049.png?raw=true" alt="image-20200817072928049"></p>
+<h3 id="AOP的术语"><a href="#AOP的术语" class="headerlink" title="AOP的术语"></a>AOP的术语</h3><p><strong>Joinpoint(连接点)</strong>:所谓连接点是指那些被拦截到的点。在Spring中，这些点指的是方法。</p>
+<p><strong>Pointcut(切入点)</strong>:所谓切入点是指我们要对哪些Joinpoint进行拦截的定义。</p>
+<p><strong>Advice(通知)</strong>:所谓通知是指拦截到Joinpoint之后所要做的事情。(切面要完成的功能)</p>
+<p>​                        通知分为:前置通知，后置通知，异常通知，最终通知，环绕通知。</p>
+<p><strong>Target(目标对象)</strong>:代理的目标对象。</p>
+<p><strong>Weaving(织入)</strong>:是指把增强应用到目标对象来创建新的代理对象的过程。</p>
+<p><strong>Proxy(代理)</strong>:一个类被AOP织入增强后，就产生一个结果代理类。</p>
+<p><strong>Aspect(切面)</strong>:是指切入点和通知的结合。</p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200817074808148.png?raw=true" alt="image-20200817074808148"></p>
+<h2 id="2-AOP的底层实现——动态代理"><a href="#2-AOP的底层实现——动态代理" class="headerlink" title="2.AOP的底层实现——动态代理"></a>2.AOP的底层实现——动态代理</h2><h3 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><p>运行代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userDao proxy = (userDao) <span class="keyword">new</span> MyJdkProxy(userDao).createProxy();</span><br></pre></td></tr></table></figure>
+
+<p>底层实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mzdora.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJdkProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> userDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyJdkProxy</span><span class="params">(userDao userDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">createProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Object proxy = Proxy.newProxyInstance(userDao.getClass().getClassLoader(), userDao.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"add"</span>.equals(method.getName()))&#123;</span><br><span class="line">            System.out.println(<span class="string">"权限校验"</span>);</span><br><span class="line">            <span class="keyword">return</span> method.invoke(userDao,args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> method.invoke(userDao,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h3><p>略了</p>
+<p><img src="https://github.com/mzdora/photobed/blob/master/image-20200818022612355.png?raw=true" alt="image-20200818022612355"></p>
+<h2 id="3-Spring-AOP通知-增强-类型"><a href="#3-Spring-AOP通知-增强-类型" class="headerlink" title="3.Spring AOP通知(增强)类型"></a>3.Spring AOP通知(增强)类型</h2><p>AOP联盟为通知Advice定义了org.aopalliance.aop.Interface.Advice这样一个接口</p>
+<p>Spring按照通知Advice在目标类方法的连接点位置，可以分为五类</p>
+<ul>
+<li><p>前置通知 org.springframework.aop.MethodBeforeAdvice</p>
+</li>
+<li><p>后置通知 org.springframework.aop.AfterReturningAdvice</p>
+</li>
+<li><p>环绕通知 org.aopalliance.intercepet.MethodInterceptor 在目标方法执行前后都增强</p>
+</li>
+<li><p>异常抛出通知 org.springframework.aop.ThrowsAdvice 在方法抛出异常后实施增强</p>
+</li>
+<li><p><del>引介通知 org.springframework.aop.IntroductionIntercepetor 在目标类中添加一些新的方法和属性</del></p>
+</li>
+</ul>
+<h2 id="4-Spring-AOP切面类型"><a href="#4-Spring-AOP切面类型" class="headerlink" title="4.Spring AOP切面类型"></a>4.Spring AOP切面类型</h2><p>Advisor:代表一般切面，Advice本身就是一个切面，对目标类所有方法进行拦截。</p>
+<p>PointcutAdvisor:代表具有切点的切面，可以指定拦截目标类哪些方法。</p>
+<h2 id="5-一般切面的代码实现"><a href="#5-一般切面的代码实现" class="headerlink" title="5.一般切面的代码实现"></a>5.一般切面的代码实现</h2><p>首先我们要导包:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.8.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>aopalliance<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aopalliance<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们要建一个Advice类:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mzdora.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.aop.MethodBeforeAdvice;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBeforeAdvice</span> <span class="keyword">implements</span> <span class="title">MethodBeforeAdvice</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(Method method, Object[] objects, Object o)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"世界你好。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 springcontext中配置bean:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"StudentDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo3.StudentDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"MyBeforeAdvice"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo3.MyBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"studentDaoProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--target表示目标对象Bean--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"StudentDao"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--proxyInterfaces表示目标对象的接口--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyInterfaces"</span> <span class="attr">value</span>=<span class="string">"com.mzdora.demo3.StudentDao"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--interceptorNames表示实现Advice的Bean--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"MyBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-PointcutAdvisor切点切面"><a href="#6-PointcutAdvisor切点切面" class="headerlink" title="6.PointcutAdvisor切点切面"></a>6.PointcutAdvisor切点切面</h2><p>使用普通Advice作为切面，将对目标所有方法进行拦截，不灵活。实际开发中用这个！</p>
+<p>常用PointcutAdvisor实现类</p>
+<ul>
+<li><p>DefaultPointcutAdvisor 最常用的切面类型，他可以通过任意Pointcut和Advice组合定义切面</p>
+</li>
+<li><p>JdkRegexpMethodPointcut 构造正则表达式切点</p>
+</li>
+</ul>
+<p>首先建一个MyAroundAdvice类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mzdora.demo4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.aopalliance.intercept.MethodInterceptor;</span><br><span class="line"><span class="keyword">import</span> org.aopalliance.intercept.MethodInvocation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAroundAdvice</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(MethodInvocation methodInvocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"环绕前"</span>);</span><br><span class="line">        Object obj = methodInvocation.proceed();</span><br><span class="line">        System.out.println(<span class="string">"环绕后"</span>);</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们开始配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"customerDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo4.CurstomerDao"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAroundAdvice"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo4.MyAroundAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这里是PointcutAdvisor来搞切点的--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.RegexpMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--正则表达式，找其中的方法--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"pattern"</span> <span class="attr">value</span>=<span class="string">".*save.*"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--是哪个advice--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"myAroundAdvice"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这里是代理--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"customerDaoProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"customerDao"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--没有接口所以用这个--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyTargetClass"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"myAdvisor"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-Spring的传统AOP的动态代理"><a href="#7-Spring的传统AOP的动态代理" class="headerlink" title="7.Spring的传统AOP的动态代理"></a>7.Spring的传统AOP的动态代理</h2><h3 id="自动创建代理"><a href="#自动创建代理" class="headerlink" title="自动创建代理"></a>自动创建代理</h3><p>前面每个代理都是用过ProxyFactoryBean来搞的，特别繁琐。</p>
+<p>所以解法办法:自动创建代理</p>
+<h3 id="1-BeanNameAutoProxyCreator"><a href="#1-BeanNameAutoProxyCreator" class="headerlink" title="1.BeanNameAutoProxyCreator"></a>1.BeanNameAutoProxyCreator</h3><p>根据Bean的名称来自动代理。</p>
+<p>首先配置一下applicationContext.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"studentDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo5.StudentDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"curstomerDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo5.CurstomerDao"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myBeforeAdvide"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo5.MyBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAroundAdvice"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo5.MyAroundAdvice"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beanNames"</span> <span class="attr">value</span>=<span class="string">"*Dao"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"myBeforeAdvide"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最下面那个bean表示AOP自动代理。</p>
+<h3 id="2-DefaultAdvisorAutoProxyCreator"><a href="#2-DefaultAdvisorAutoProxyCreator" class="headerlink" title="2.DefaultAdvisorAutoProxyCreator"></a>2.DefaultAdvisorAutoProxyCreator</h3><p>首先配置一下applicationContext.xml</p>
+<p>这是用切面来整。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"studentDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo6.StudentDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"curstomerDao"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo6.CurstomerDao"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myBeforeAdvide"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo6.MyBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAroundAdvice"</span> <span class="attr">class</span>=<span class="string">"com.mzdora.demo6.MyAroundAdvice"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.RegexpMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"pattern"</span> <span class="attr">value</span>=<span class="string">"com\.mzdora\.demo6\.CurstomerDao\.save"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"myAroundAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/09/30/Spring%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F(3)/" class="article-date">
+  <time class="dt-published" datetime="2020-09-30T15:07:19.734Z" itemprop="datePublished">2020-09-30</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/09/30/Spring%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F(4)/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring从入门到入坟(4)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/30/Spring%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F(2)/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring从入门到入坟(2)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

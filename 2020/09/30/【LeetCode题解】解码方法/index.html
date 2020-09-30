@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】解码方法 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天讲一下动态规划的一个经典问题。 这道题其实我们很容易画一颗递归树来解决，但是会超时。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;decode-ways&#x2F; 题目描叙： 一条包含字母 A-Z 的消息通过以下方式进行了编码： 1234&#39;A&#39; -&gt; 1&#39;B&#39; -&gt; 2...&#39;Z&#39; -&gt; 26  给定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】解码方法">
+<meta property="og:url" content="http://yoursite.com/2020/09/30/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="今天讲一下动态规划的一个经典问题。 这道题其实我们很容易画一颗递归树来解决，但是会超时。  题目链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;decode-ways&#x2F; 题目描叙： 一条包含字母 A-Z 的消息通过以下方式进行了编码： 1234&#39;A&#39; -&gt; 1&#39;B&#39; -&gt; 2...&#39;Z&#39; -&gt; 26  给定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/%E9%80%92%E5%BD%92%E6%A0%91.jpg?raw=true">
+<meta property="article:published_time" content="2020-09-30T15:07:19.774Z">
+<meta property="article:modified_time" content="2020-04-17T16:06:48.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/%E9%80%92%E5%BD%92%E6%A0%91.jpg?raw=true">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】解码方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="https://mzdora.github.io/2020/04/16/我是谁/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】解码方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>今天讲一下动态规划的一个经典问题。</p>
+<p>这道题其实我们很容易画一颗递归树来解决，但是会超时。</p>
+</blockquote>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/decode-ways/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/decode-ways/</a></p>
+<p><strong>题目描叙</strong>：</p>
+<p>一条包含字母 <code>A-Z</code> 的消息通过以下方式进行了编码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;A&#39; -&gt; 1</span><br><span class="line">&#39;B&#39; -&gt; 2</span><br><span class="line">...</span><br><span class="line">&#39;Z&#39; -&gt; 26</span><br></pre></td></tr></table></figure>
+
+<p>给定一个只包含数字的<strong>非空</strong>字符串，请计算解码方法的总数。</p>
+<p><strong>（注意这里面不包含数字0）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;12&quot;</span><br><span class="line">输出: 2</span><br><span class="line">解释: 它可以解码为 &quot;AB&quot;（1 2）或者 &quot;L&quot;（12）。</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;226&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 它可以解码为 &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), 或者 &quot;BBF&quot; (2 2 6) 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：</p>
+<p>拿到这个字符串，我们很容易首先<strong>从前往后</strong>的看这个字符串。其实对于字符串中的<strong>每一个字符</strong>来说都有两种决策，一是把它当成<strong>独立的数字</strong>，二是和后面那个字符<strong>组合成新的数字</strong>。所以我们很容易的画出这样一颗递归树：</p>
+<img src="https://github.com/mzdora/photobed/blob/master/%E9%80%92%E5%BD%92%E6%A0%91.jpg?raw=true" alt="递归树" style="zoom: 25%;" />
+
+<p>对于字符串<strong>“12216“</strong>来说，我们首先会有<strong>1</strong>和<strong>12</strong>两个选择，然后挨着<strong>递归</strong>下去。然后我们会注意到，对于字符串<strong>”1012“、”12236“</strong>，每个<strong>字符0</strong>我们都没得选，因为无论是<strong>字符0</strong>还是<strong>字符串01</strong>都不对应字母。而对于<strong>字符3</strong>来说，只有一种选择，只能选择<strong>独立的数字</strong>，而<strong>不能组合成36</strong>（36大于26）。</p>
+<p>因此我们首先得到一个DFS的答案：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        dfs(<span class="number">0</span>, s);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i, String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; s.length() - <span class="number">1</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s.charAt(i) == <span class="string">'0'</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (i &lt;= s.length() - <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">char</span>[] ch = &#123; s.charAt(i),s.charAt(i+<span class="number">1</span>) &#125;;</span><br><span class="line">            String res = <span class="keyword">new</span> String(ch);</span><br><span class="line">            <span class="comment">//System.out.println(res);</span></span><br><span class="line">            <span class="keyword">int</span> resint = Integer.parseInt(res);</span><br><span class="line">            <span class="keyword">if</span> (resint &lt;= <span class="number">26</span>) &#123;</span><br><span class="line">                dfs(i + <span class="number">2</span>, s);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(i + <span class="number">1</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(numDecodings(<span class="string">"12236"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>聪明的童鞋已经注意到了：我们的递归树有太多的重复计算过程。我们如何简化这个重复计算过程呢？没错，就是<strong>动态规划</strong>。</p>
+<p>我们很容易猜到<strong>dp</strong>的状态转移方程 <em>dp[i] = dp[i+1] + dp[i+2];</em></p>
+<p>引入一个数组 <em>dp[]</em> ，用来记录以<strong>某个字符为开始的解码数</strong>。我们现在从<strong>字符串的最后往前面</strong>看，以字符串<strong>“2206”</strong>为例，字符串的最后一个字符是<strong>6</strong>，我们只有<strong>一种选择</strong>(<em>dp[i] = 1 or 0</em>)。而倒数第二个字符是<strong>0</strong>，我们<strong>没有选择</strong>(dp[i] = 0)，接下来倒数第三个字符是<strong>2</strong>，我们可以组成<strong>20</strong>和单个数字<strong>2</strong>，所以我们有<strong>两种选择</strong>(<em>dp[i+1] + dp[i+2]</em>)。</p>
+<p>我们对每个字符分类讨论后，就可以得到一个动态规划的答案了：</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[s.length()+<span class="number">1</span>];</span><br><span class="line">        dp[s.length()] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>( s.charAt(s.length()-<span class="number">1</span>) == <span class="string">'0'</span> )&#123;</span><br><span class="line">            dp[s.length()-<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            dp[s.length()-<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=s.length()-<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>( s.charAt(i) == <span class="string">'0'</span> )&#123;</span><br><span class="line">                dp[i] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">char</span>[] ch = &#123; s.charAt(i),s.charAt(i+<span class="number">1</span>) &#125;;</span><br><span class="line">            String res = <span class="keyword">new</span> String(ch);</span><br><span class="line">            <span class="keyword">int</span> resint = Integer.parseInt(res);</span><br><span class="line">            <span class="keyword">if</span>( resint &lt;= <span class="number">26</span> )&#123;</span><br><span class="line">                dp[i] = dp[i+<span class="number">1</span>] + dp[i+<span class="number">2</span>];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = dp[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/09/30/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2020-09-30T15:07:19.774Z" itemprop="datePublished">2020-09-30</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/09/30/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E8%AF%BE%E7%A8%8B%E8%A1%A8/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【LeetCode题解】课程表
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/30/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】盛最多水的容器</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
