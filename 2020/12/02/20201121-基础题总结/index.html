@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201121-基础题总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="String 类能不能被继承？为什么？ 不可以，因为String类有final修饰符，而final修饰的类是不能被继承的，实现细节不允许改变。 Java 线程和操作系统的线程是怎么对应的？Java线程是怎样进行调度的? Java线程有6种状态 12345678910&#x2F;&#x2F;src&#x2F;java.base&#x2F;share&#x2F;classes&#x2F;java&#x2F;lang&#x2F;Thread.javapublic enum Sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201121-基础题总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/02/20201121-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="String 类能不能被继承？为什么？ 不可以，因为String类有final修饰符，而final修饰的类是不能被继承的，实现细节不允许改变。 Java 线程和操作系统的线程是怎么对应的？Java线程是怎样进行调度的? Java线程有6种状态 12345678910&#x2F;&#x2F;src&#x2F;java.base&#x2F;share&#x2F;classes&#x2F;java&#x2F;lang&#x2F;Thread.javapublic enum Sta">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201121085738893.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200311201352528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzM2MTg0MDc1,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-12-02T14:14:41.423Z">
+<meta property="article:modified_time" content="2020-11-21T09:47:16.208Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201121085738893.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201121-基础题总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201121-基础题总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201121085738893.png" alt="image-20201121085738893"></p>
+<p><strong>String 类能不能被继承？为什么？</strong></p>
+<p>不可以，因为String类有final修饰符，而final修饰的类是不能被继承的，实现细节不允许改变。</p>
+<p><strong>Java 线程和操作系统的线程是怎么对应的？Java线程是怎样进行调度的?</strong></p>
+<p>Java线程有6种状态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//src/java.base/share/classes/java/lang/Thread.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">        NEW,</span><br><span class="line">        RUNNABLE,</span><br><span class="line">        BLOCKED,</span><br><span class="line">        WAITING,</span><br><span class="line">        TIMED_WAITING,</span><br><span class="line">        TERMINATED;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>操作系统中的线程除去<code>new</code>和<code>terminated</code>状态，一个线程真实存在的状态，只有：</p>
+<ul>
+<li><code>ready</code> ：表示线程已经被创建，正在等待系统调度分配CPU使用权。</li>
+<li><code>running</code>：表示线程获得了CPU使用权，正在进行运算</li>
+<li><code>waiting</code>：表示线程等待（或者说挂起），让出CPU资源给其他线程使用</li>
+</ul>
+<p>无论是<code>Timed Waiting</code> ，<code>Waiting</code>还是<code>Blocked</code>，对应的都是操作系统线程的<code>waiting（等待）</code>状态。</p>
+<p>而<code>Runnable</code>状态，则对应了操作系统中的<code>ready</code>和<code>running</code>状态。</p>
+<p>Java线程调度的方式</p>
+<ol>
+<li><p>抢占式调度</p>
+<p>抢占式调度指的是<strong>每条线程执行的时间、线程的切换都由系统控制</strong>。<br>系统控制指的是在系统某种运行机制下，可能每条线程都分同样的执行时间片，也可能是某些线程    执行的时间片较长，甚至某些线程得不到执行的时间片。在这种机制下，一个线程的堵塞不会导致    整个进程堵塞。</p>
+</li>
+<li><p>协同式调度</p>
+<p>协同式调度指<strong>某一线程执行完后主动通知系统切换到另一线程上执行</strong>。这种模式就像接力赛一样，一个人跑完自己的路程就把接力棒交接给下一个人，下个人继续往下跑。线程的执行时间由线程本身控制，线程切换可以预知，不存在多线程同步问题，但它有一个致命    弱点：如果一个线程编写有问题，运行到一半就一直堵塞，那么可能导致整个系统崩溃。</p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200311201352528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzM2MTg0MDc1,size_16,color_FFFFFF,t_70" alt="Java中JVM线程调度"></p>
+<p><strong>ThreadLocal 实现原理是什么？</strong></p>
+<p>ThreadLocal是线程内部的数据存储类，通过它可以指定的线程中存储数据，数据存储以后，只有在指定线程中可以获取到存储的数据，对于其他线程来说则无法获取数据。我们可以把 <code>ThreadLocalMap</code> 理解为<code>ThreadLocal</code> 类实现的定制化的 <code>HashMap</code>。</p>
+<p>ThreadLocal类的set()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>)</span><br><span class="line">        map.set(<span class="keyword">this</span>, value);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ThreadLocalMap <span class="title">getMap</span><span class="params">(Thread t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t.threadLocals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ThreadLocal类的get()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> (T)e.value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/12/02/20201121-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-12-02T14:14:41.423Z" itemprop="datePublished">2020-12-02</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/12/02/20201122-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20201122-基础题总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/02/20201120-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20201120-基础题总结</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201120-基础题总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？ 我们谈论的垃圾收集（Garbage Collection，GC）主要是针对Java堆内存的回收，而堆里面主要存放的就是对象，那么如果判断对象是否能够被回收呢？主要有两种方式：引用计数法和可达性分析。  引用计数法 给对象中添加一个引用计数器，每当有一个地方引用它时，计数器就加1；当引用失效时，计数器就减1；当计数器为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201120-基础题总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/02/20201120-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？ 我们谈论的垃圾收集（Garbage Collection，GC）主要是针对Java堆内存的回收，而堆里面主要存放的就是对象，那么如果判断对象是否能够被回收呢？主要有两种方式：引用计数法和可达性分析。  引用计数法 给对象中添加一个引用计数器，每当有一个地方引用它时，计数器就加1；当引用失效时，计数器就减1；当计数器为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201120092119950.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20180104183443064">
+<meta property="article:published_time" content="2020-12-02T14:14:41.415Z">
+<meta property="article:modified_time" content="2020-11-20T10:22:15.672Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201120092119950.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201120-基础题总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201120-基础题总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201120092119950.png" alt="image-20201120092119950"></p>
+<p><strong>Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？</strong></p>
+<p>我们谈论的垃圾收集（Garbage Collection，GC）主要是针对Java堆内存的回收，而堆里面主要存放的就是对象，那么如果判断对象是否能够被回收呢？主要有两种方式：引用计数法和可达性分析。</p>
+<ol>
+<li><p>引用计数法</p>
+<p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器就加1；当引用失效时，计数器就减1；当计数器为0时对象就是不再被使用的。但这个几乎没有GC去使用，因为很难解决循环依赖的问题。</p>
+</li>
+<li><p>可达性分析</p>
+<p>通过一系列的称为”GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链，当一个对象的GC Roots没有任何引用链相连（就是从GC Roots到对象不可达）时，则证明此对象是不可用的。</p>
+</li>
+</ol>
+<p>GC回收算法</p>
+<ol>
+<li><p>“标记-清除”(Mark-Sweep)算法</p>
+<p>分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
+</li>
+<li><p>“复制”(Copying)算法</p>
+<p>它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把己使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。其缺点是只能用一半内存，浪费资源。</p>
+</li>
+<li><p>“标记-整理”(Mark-Compact)算法</p>
+<p>在回收老年代时可能回收后还有很多对象存活，复制算法肯定是不合适的，根据老年代的特点，”标记-整理”（Mark-Compact）算法出现了，标记过程仍然与”标记一清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
+</li>
+<li><p>分代收集算法</p>
+<p>根据对象生存周期的不同，将内存划分为几块。Java堆中是分为新生代和老年代，新生代对象朝生夕死选择复制算法。老年代对象存活率高、没有分配担保，必须采用标记-清除或者标记-整理算法进行回收。</p>
+</li>
+</ol>
+<p><strong>简述 JVM 的内存模型，JVM 内存是如何对应到操作系统内存的？</strong></p>
+<p><img src="https://img-blog.csdn.net/20180104183443064" alt="img"></p>
+<p>在JVM中，可以从线程私有和共享来划分它的内存模型</p>
+<p>线程私有的：程序计数器，虚拟机栈，本地方法栈</p>
+<p>共享的：方法区，Java堆</p>
+<p>程序计数器</p>
+<ol>
+<li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li>
+<li>线程私有，因此在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li>
+<li>程序计数器是唯一一个不会出现OutOfMemoryError的内存区域，它的生命周期随着线程的创建而创建，随着线程的结束而死亡。</li>
+</ol>
+<p>虚拟机栈</p>
+<p>​    1.线程私有，生命周期与线程相同。</p>
+<p>​    2.每个方法执行的时候都会创建一个栈帧，引擎的所有指令都是针对于当前栈帧进行操作的，它是方法运行时的基础数据结构。栈帧中主要存储以下的信息：</p>
+<ul>
+<li>局部变量表，存储方法参数及方法内存定义的局部变量，存储单位是slot。</li>
+<li>操作数栈，方法执行之初为空，执行过程中会有各种字节码指令写入或者弹出值。例如，在做算术运算的时候是通过操作数栈来进行的。</li>
+<li>动态链接，运行时转为直接引用。</li>
+<li>地址返回</li>
+</ul>
+<ol start="3">
+<li>虚拟机栈可以动态扩展，当无法申请到足够的内存就会发生OutOfMemoryError的异常。</li>
+</ol>
+<p>本地方法栈</p>
+<p>​    和虚拟机栈差不多，但是为native方法服务。</p>
+<p>堆</p>
+<ol>
+<li>Java堆在JVM中是一块最大的内存，在虚拟机创建时启动，此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例以及数组都在这里分配内存。</li>
+<li>由于现在有了逃逸分析技术，也可以将对象分配到栈上；</li>
+<li>物理上可以不连续，逻辑上要求连续；</li>
+<li>堆空间不足时抛出 OutOfMemoryError；</li>
+</ol>
+<p>方法区</p>
+<p>方法区与 Java 堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然 Java 虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与 Java 堆区分开来。方法区也被称为永久代。</p>
+<p>JVM 内存是如何对应到操作系统内存的？</p>
+<p>原来jvm的设计的模型其实就是操作系统的模型，基于操作系统的角度，jvm就是一个应用，而基于class文件来说，jvm就是个操作系统，而jvm的方法区，也就相当于操作系统的硬盘区。</p>
+<p><strong>集合类中的 List 的线程安全版本是什么，如何保证线程安全的？</strong></p>
+<p>是CopyOnWriteArrayList</p>
+<p>即复制再写入，就是在添加元素的时候先加锁，把原 List 列表复制一份，再添加新的元素，最后再释放锁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 加锁</span></span><br><span class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 获取原始集合</span></span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        <span class="keyword">int</span> len = elements.length;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 复制一个新集合</span></span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 替换原始集合为新集合</span></span><br><span class="line">        setArray(newElements);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 释放锁</span></span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而get()方法并没有加锁，在高并发情况下，读取元素时就不用加锁，写数据时才加锁，大大提升了读取性能。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/12/02/20201120-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-12-02T14:14:41.415Z" itemprop="datePublished">2020-12-02</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/12/02/20201121-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20201121-基础题总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/02/20201119-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20201119-基础题总结</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

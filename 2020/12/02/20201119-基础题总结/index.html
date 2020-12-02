@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201119-基础题总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HashMap 与 ConcurrentHashMap 的实现原理是怎样的？ConcurrentHashMap 是如何保证线程安全的？ java7和java8在实现HashMap上有所区别，当然java8的效率要更好一些，主要是java8的HashMap在java7的基础上增加了红黑树这种数据结构。JDK1.8 之前HashMap 底层是数组和链表结合在一起使用，jdk1.8在解决哈希冲突时有了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201119-基础题总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/02/20201119-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="HashMap 与 ConcurrentHashMap 的实现原理是怎样的？ConcurrentHashMap 是如何保证线程安全的？ java7和java8在实现HashMap上有所区别，当然java8的效率要更好一些，主要是java8的HashMap在java7的基础上增加了红黑树这种数据结构。JDK1.8 之前HashMap 底层是数组和链表结合在一起使用，jdk1.8在解决哈希冲突时有了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201119061155740.png">
+<meta property="article:published_time" content="2020-12-02T14:14:41.407Z">
+<meta property="article:modified_time" content="2020-11-19T07:24:16.221Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201119061155740.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201119-基础题总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201119-基础题总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201119061155740.png" alt="image-20201119061155740"></p>
+<p><strong>HashMap 与 ConcurrentHashMap 的实现原理是怎样的？ConcurrentHashMap 是如何保证线程安全的？</strong></p>
+<p>java7和java8在实现HashMap上有所区别，当然java8的效率要更好一些，主要是java8的HashMap在java7的基础上增加了红黑树这种数据结构。JDK1.8 之前HashMap 底层是数组和链表结合在一起使用，jdk1.8在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p>
+<p>HashMap线程不安全,在并发状况下扩容可能会造成环状链表，导致get操作时cpu空转，且put操作多线程数据不一致。</p>
+<p>为什么线程安全不用HashTable？</p>
+<p>HashTable大部分和HashMap一致，但是不允许&lt;Key,Value&gt;为null，它虽然是线程安全的，但它用sychronized锁了get/put方法导致性能非常差。</p>
+<p>ConcurrentHashMap就不一样，它采用了分段锁的方法。</p>
+<p>final segment&lt;K,V&gt;[] segments;</p>
+<p>segment是一种可入重锁，它继承了ReentrantLork。同一个segment的操作才需要同步，不是同一个则不需要同步。</p>
+<p><strong>volatile 关键字解决了什么问题，它的实现原理是什么？</strong></p>
+<p>CPU缓存是为了解决CPU处理速度和内存处理速度不对等问题。</p>
+<ol>
+<li><p>Volatile解决了CPU缓存可见性问题</p>
+<p>当写一个Volatile变量时，JMM会把该线程的对应的本地内存中的共享变量值刷新到主内存。</p>
+<p>当读一个Volatile变量时，JMM会把对应线程的本地内存无效，从主存中读取变量。</p>
+</li>
+<li><p>Volatile解决了指令重排序的问题</p>
+<p>为了提高性能，编译器和处理器常常会对指令重排序。</p>
+<p>源代码 -&gt; 编译器重排序 -&gt; 指令集并行重排序 -&gt; 内存系统重排序 -&gt; 执行</p>
+</li>
+</ol>
+<p>Volatile原理</p>
+<p>采用了内存屏障，在处理volatile修饰的变量使，加上一组cpu执行，使缓存强制同步到内存，或使缓存直接失效。</p>
+<p>有四种内存屏障:</p>
+<p>LoadLoad(Volatile读之前插入) ： 确保Load2及后续Load指令加载数据之前能访问到Load1加载的数据。</p>
+<p>StoreStore(Volatile写之前插入) ： 确保Store2以及后续Store指令执行前，Store1操作的数据对其它处理器可见。</p>
+<p>LoadStore ：确保Store2和后续Store指令执行前，可以访问到Load1加载的数据。</p>
+<p>StoreLoad ： 确保Load2和后续的Load指令读取之前，Store1的数据对其他处理器是可见的。</p>
+<p><strong>synchronized 关键字底层是如何实现的？它与 Lock 相比优缺点分别是什么？</strong></p>
+<p>synchronized 关键字底层原理属于 JVM 层面。</p>
+<p>synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置。</p>
+<p>synchronized 修饰的方法并没有 monitorenter 指令和 monitorexit 指令，取得代之的是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法。</p>
+<p>不过两者的本质都是对 monitor 的获取。</p>
+<p>与Lock相比的优缺点</p>
+<ol>
+<li><p>lock不是java语言内置的，synchronized是java语言的关键字，因此是内置特性。lock是一个类，通过这个类可以实现同步访问；</p>
+</li>
+<li><p>lock和synchronized有一点非常大的不同，采用synchronized不需要用户手动的去释放锁，当synchronized方法或者代码块执行完毕之后，系统会自动的让线程释放对锁的占有，而lock则必须要用户去手动释放锁，如果没有主动的释放锁，就会可能导致出现死锁的现象</p>
+</li>
+<li><p>lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去。</p>
+</li>
+<li><p>通过lock可以知道有没有成功获取锁，而synchronized却无法办到</p>
+</li>
+<li><p>lock可以提高多个线程进行读操作的效率</p>
+</li>
+</ol>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/12/02/20201119-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-12-02T14:14:41.407Z" itemprop="datePublished">2020-12-02</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/12/02/20201120-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20201120-基础题总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/09/%E3%80%90MIT6.S081%E3%80%91%E5%AD%A6%E5%88%B0%E5%93%AA%E5%86%99%E5%88%B0%E5%93%AA(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【MIT6.S081】学到哪写到哪(一)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

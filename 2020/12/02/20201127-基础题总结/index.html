@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201127-基础题总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简述 Linux 系统态与用户态，什么时候会进入系统态？  从图上我们可以看出来通过系统调用将Linux整个体系分为用户态和内核态（或者说内核空间和用户空间）。 那内核态到底是什么呢？其实从本质上说就是我们所说的内核，它是一种特殊的软件程序，特殊在哪儿呢？控制计算机的硬件资源，例如协调CPU资源，分配内存资源，并且提供稳定的环境供应用程序运行。 用户态就是提供应用程序运行的空间，为了使应用程序访">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201127-基础题总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/02/20201127-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="简述 Linux 系统态与用户态，什么时候会进入系统态？  从图上我们可以看出来通过系统调用将Linux整个体系分为用户态和内核态（或者说内核空间和用户空间）。 那内核态到底是什么呢？其实从本质上说就是我们所说的内核，它是一种特殊的软件程序，特殊在哪儿呢？控制计算机的硬件资源，例如协调CPU资源，分配内存资源，并且提供稳定的环境供应用程序运行。 用户态就是提供应用程序运行的空间，为了使应用程序访">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201127122248272.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-d3723a14f07a42c7e016ae9bc38eddef_720w.jpg">
+<meta property="article:published_time" content="2020-12-02T14:14:41.467Z">
+<meta property="article:modified_time" content="2020-11-27T11:44:53.677Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201127122248272.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201127-基础题总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201127-基础题总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <p><img src="C:%5CUsers%5Cmzdor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201127122248272.png" alt="image-20201127122248272"></p>
+<p><strong>简述 Linux 系统态与用户态，什么时候会进入系统态？</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-d3723a14f07a42c7e016ae9bc38eddef_720w.jpg" alt="img"></p>
+<p>从图上我们可以看出来通过<strong>系统调用</strong>将Linux整个体系分为用户态和内核态（或者说内核空间和用户空间）。</p>
+<p>那内核态到底是什么呢？其实从本质上说就是我们所说的内核，它是一种<strong>特殊的软件程序</strong>，特殊在哪儿呢？<strong>控制计算机的硬件资源，例如协调CPU资源，分配内存资源，并且提供稳定的环境供应用程序运行</strong>。</p>
+<p>用户态就是提供应用程序运行的空间，为了使应用程序访问到内核管理的资源例如CPU，内存，I/O。内核必须提供一组通用的访问接口，这些接口就叫<strong>系统调用。</strong></p>
+<p><strong>从用户态到内核态切换可以通过三种方式：</strong></p>
+<ol>
+<li>系统调用：其实系统调用本身就是中断，但是软件中断，跟硬中断不同。</li>
+<li>异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。例如：缺页异常。</li>
+<li>外设中断：当外设完成用户的请求时，会向CPU发送中断信号。</li>
+</ol>
+<p><strong>简述 LRU 算法及其实现方式</strong></p>
+<p><a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/lru-cache/</a></p>
+<p><strong>线程间有哪些通信方式？</strong></p>
+<ol>
+<li><p>锁机制：包括<strong>互斥锁</strong>、<strong>条件变量</strong>、<strong>读写锁</strong>和<strong>自旋锁</strong></p>
+<p><strong>互斥锁</strong>确保同一时间只能有一个线程访问共享资源。当锁被占用时试图对其加锁的线程都进入阻塞状态(释放CPU资源使其由运行状态进入等待状态)。当锁释放时哪个等待线程能获得该锁取决于内核的调度。</p>
+<p><strong>读写锁</strong>当以写模式加锁而处于写状态时任何试图加锁的线程(不论是读或写)都阻塞，当以读状态模式加锁而处于读状态时“读”线程不阻塞，“写”线程阻塞。读模式共享，写模式互斥。</p>
+<p><strong>条件变量</strong>可以以原子的方式阻塞进程，直到某个特定条件为真为止。对条件的测试是在互斥锁的保护下进行的。条件变量始终与互斥锁一起使用。</p>
+<p><strong>自旋锁</strong>上锁受阻时线程不阻塞而是在循环中轮询查看能否获得该锁，没有线程的切换因而没有切换开销，不过对CPU的霸占会导致CPU资源的浪费。 所以自旋锁适用于并行结构(多个处理器)或者适用于锁被持有时间短而不希望在线程切换产生开销的情况。</p>
+</li>
+<li><p>信号量机制(Semaphore)：包括无名线程信号量和命名线程信号量</p>
+</li>
+<li><p>信号机制(Signal)：类似进程间的信号处理</p>
+</li>
+</ol>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/12/02/20201127-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-12-02T14:14:41.467Z" itemprop="datePublished">2020-12-02</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/12/02/20201128-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20201128-基础题总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/02/20201126-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20201126-基础题总结</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
