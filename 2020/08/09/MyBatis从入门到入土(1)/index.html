@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>MyBatis从入门到入土(1) | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖  创建核心配置文件  创建实体(Entity)类  创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis从入门到入土(1)">
+<meta property="og:url" content="http://yoursite.com/2020/08/09/MyBatis%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F(1)/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖  创建核心配置文件  创建实体(Entity)类  创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-08T23:19:12.000Z">
+<meta property="article:modified_time" content="2020-08-08T23:19:12.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-MyBatis从入门到入土(1)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MyBatis从入门到入土(1)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h2 id="1-介绍MyBatis"><a href="#1-介绍MyBatis" class="headerlink" title="1.介绍MyBatis"></a>1.介绍MyBatis</h2><p>1.MyBatis是优秀的持久层(DAO)框架</p>
+<p>2.MyBatis使用XML将SQL与应用程序解耦，便于维护</p>
+<p>3.是JDBC的延伸，快速上手</p>
+<p><strong>MyBatis开发流程:</strong></p>
+<ul>
+<li>引入MyBatis依赖 </li>
+<li>创建核心配置文件 </li>
+<li>创建实体(Entity)类 </li>
+<li>创建Mapper映射文件</li>
+<li>初始化SessionFactory</li>
+<li>利用SqlSession对象操作数据</li>
+</ul>
+<h2 id="2-MyBatis的环境配置"><a href="#2-MyBatis的环境配置" class="headerlink" title="2.MyBatis的环境配置"></a>2.MyBatis的环境配置</h2><ol>
+<li><p>mybatis-config.xml (这是核心配置文件)    </p>
+<ul>
+<li>用来配置数据库信息</li>
+<li>环境用<environment></environment>标签</li>
+<li>标签包含各种子标签 </li>
+<li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mybatis-config.xml" target="_blank" rel="noopener">mybatis-config.xml</a> (这里直接套模板吧)</li>
+</ul>
+</li>
+<li><p>pom.xml(配置依赖)</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SqlSessionFactory(会话工厂)</p>
+<ul>
+<li>SqlSessionFactory是MyBatis的核心对象</li>
+<li>用于创建SQLSession对象</li>
+<li>保证SqlSessionFactory在应用中全局唯一</li>
+</ul>
+</li>
+<li><p>SqlSession</p>
+<ul>
+<li>SqlSession是MyBatis操作数据库的核心对象</li>
+<li>SqlSession使用JDBC与数据库交互</li>
+<li>SqlSession对象提供了数据表增删改查对应方法</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisTester</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//读取配置文件</span></span><br><span class="line">        Reader resource = Resources.getResourceAsReader(<span class="string">"mybatis-config.xml"</span>);</span><br><span class="line">        <span class="comment">//创建会话工厂</span></span><br><span class="line">        SqlSessionFactory build = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(resource);</span><br><span class="line">        <span class="comment">//创建会话</span></span><br><span class="line">        SqlSession sqlSession = build.openSession();</span><br><span class="line">        <span class="comment">//关闭会话</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>初始化工具类MyBatisUtils(这就是个工具类，创建全局唯一SqlSessionFactory，用来读取配置文件+创建会话工厂,简化操作)</p>
+<ul>
+<li><p>创建Module com.mzdora.com.utils</p>
+<p> <a href="https://github.com/mzdora/Templates-for-SSM/blob/master/MybatisUtils.java" target="_blank" rel="noopener">MybatisUtils.java</a> (直接拿来用)</p>
+</li>
+<li><p>然后我们只需要 <code>SqlSession sqlSession = MybatisUtils.getSqlSession();</code> 就可以用了。</p>
+</li>
+</ul>
+</li>
+<li><p>MyBatis数据查询</p>
+<ul>
+<li><p>创建实体类(Entity)</p>
+<ul>
+<li>要和数据库中的名称类型保持一致</li>
+</ul>
+</li>
+<li><p>创建Mapper XML</p>
+<ul>
+<li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mapper.xml" target="_blank" rel="noopener">mapper.xml</a> (直接拿来用),namespace要和DAO层的Interface名称一致。</li>
+</ul>
+</li>
+<li><p>编写 select SQL标签(mapper.xml)</p>
+<ul>
+<li>在mapper中写查询语句</li>
+</ul>
+</li>
+<li><p>开启驼峰命名映射(mybatis-config.xml)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"mapUnderscoreToCamelCase"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在MyBatis-Config中添加 mapper 声明</p>
+</li>
+<li><p>在SqlSession执行SQL</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-参数传递"><a href="#3-参数传递" class="headerlink" title="3.参数传递"></a>3.参数传递</h2><ol>
+<li><p>单参数传递(使用原始对象):</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span> <span class="attr">resultType</span>=<span class="string">"com.mzdora.mybatis.entity.Goods"</span>&gt;</span></span><br><span class="line">    SELECT * FROM t_goods WHERE goods_id = #&#123;value&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>多参数传递(使用Map):</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectByRange"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.Map"</span> <span class="attr">resultType</span>=<span class="string">"com.mzdora.mybatis.entity.Goods"</span>&gt;</span></span><br><span class="line">    SELECT * FROM t_goods WHERE goods_id BETWEEN #&#123;min&#125; AND #&#123;max&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>以及他们的java代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@Test</span></span><br><span class="line"><span class="comment">//单参数传递</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">       Goods list = sqlSession.selectOne(<span class="string">"selectById"</span>, <span class="number">777</span>);</span><br><span class="line">       System.out.println(list);</span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line"><span class="comment">//多参数传递</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">       Map&lt;String,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">       map.put(<span class="string">"min"</span>,<span class="number">555</span>);</span><br><span class="line">       map.put(<span class="string">"max"</span>,<span class="number">888</span>);</span><br><span class="line">       List&lt;Goods&gt; selectByRange = sqlSession.selectList(<span class="string">"selectByRange"</span>, map);</span><br><span class="line">       <span class="keyword">for</span> (Goods goods : selectByRange) &#123;</span><br><span class="line">           System.out.println(goods);</span><br><span class="line">       &#125;</span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=2bfoe1oyt36sc" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=2bfoe1oyt36sc</a></p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/08/09/MyBatis%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F(1)/" class="article-date">
+  <time class="dt-published" datetime="2020-08-08T23:19:12.000Z" itemprop="datePublished">2020-08-09</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/08/09/MyBatis%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F(2)/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MyBatis从入门到入土(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/09/%E6%88%91%E6%98%AF%E8%B0%81/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我是谁</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】岛屿数量 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这道题是最经典的小岛题。我们需要Flood fill这样的算法技巧。 众所周知，我们的扫雷游戏的算法实现就是Flood fill  什么是Flood fill？在扫雷游戏中，你点一个方格，会一下子展开一片区域，这个展开过程，就是 FloodFill 算法实现的。也就是说，它可以被抽象成一个二维矩阵，然后从某个点开始向四周扩展，直到无法再扩展为止。  这个算法具体是怎么实现的呢？其实很简单，就是从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】岛屿数量">
+<meta property="og:url" content="http://yoursite.com/2020/04/19/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="这道题是最经典的小岛题。我们需要Flood fill这样的算法技巧。 众所周知，我们的扫雷游戏的算法实现就是Flood fill  什么是Flood fill？在扫雷游戏中，你点一个方格，会一下子展开一片区域，这个展开过程，就是 FloodFill 算法实现的。也就是说，它可以被抽象成一个二维矩阵，然后从某个点开始向四周扩展，直到无法再扩展为止。  这个算法具体是怎么实现的呢？其实很简单，就是从">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2F-M3U3aNXgGJVkKZ-TldN%2F-LrtQ_YMPIZZLxLONG6u%2F%E6%89%AB%E9%9B%B7.png?generation=1585364245183572&alt=media">
+<meta property="article:published_time" content="2020-04-19T11:30:44.000Z">
+<meta property="article:modified_time" content="2020-04-19T11:30:44.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2F-M3U3aNXgGJVkKZ-TldN%2F-LrtQ_YMPIZZLxLONG6u%2F%E6%89%AB%E9%9B%B7.png?generation=1585364245183572&alt=media">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】岛屿数量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】岛屿数量
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>这道题是最经典的小岛题。我们需要Flood fill这样的算法技巧。</p>
+<p>众所周知，我们的扫雷游戏的算法实现就是Flood fill</p>
+</blockquote>
+<p>什么是Flood fill？在扫雷游戏中，你点一个方格，会一下子展开一片区域，这个展开过程，就是 FloodFill 算法实现的。也就是说，它可以被抽象成一个二维矩阵，然后从某个点开始向四周扩展，直到无法再扩展为止。</p>
+<p><img src="https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2F-M3U3aNXgGJVkKZ-TldN%2F-LrtQ_YMPIZZLxLONG6u%2F%E6%89%AB%E9%9B%B7.png?generation=1585364245183572&alt=media" alt=""></p>
+<p>这个算法具体是怎么实现的呢？其实很简单，就是从某个点开始，对这个点的四面八方进行处理。如果满足要求则递归，不满足要求呢就不处理。</p>
+<p>这里我放上一个维基百科的递归实现方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flood_fill</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  area[x][y]=color;</span><br><span class="line">  <span class="keyword">if</span>(x&gt;<span class="number">0</span>&amp;&amp;area[x<span class="number">-1</span>][y]==<span class="number">0</span>)flood_fill(x<span class="number">-1</span>,y,color);</span><br><span class="line">  <span class="keyword">if</span>(y&gt;<span class="number">0</span>&amp;&amp;area[x][y<span class="number">-1</span>]==<span class="number">0</span>)flood_fill(x,y<span class="number">-1</span>,color);</span><br><span class="line">  <span class="keyword">if</span>(x&lt;MAX_X&amp;&amp;area[x+<span class="number">1</span>][y]==<span class="number">0</span>)flood_fill(x+<span class="number">1</span>,y,color);</span><br><span class="line">  <span class="keyword">if</span>(y&lt;MAX_Y&amp;&amp;area[x][y+<span class="number">1</span>]==<span class="number">0</span>)flood_fill(x,y+<span class="number">1</span>,color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>是不是看上去觉得一头雾水，摸不着边儿？没关系，我们从下面这道题入手就好了。</p>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/number-of-islands/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/number-of-islands/</a></p>
+<p><strong>题目描叙</strong>：</p>
+<p>给你一个由 ‘1’（陆地）和 ‘0’（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入:</span><br><span class="line">11110</span><br><span class="line">11010</span><br><span class="line">11000</span><br><span class="line">00000</span><br><span class="line">输出: 1</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入:</span><br><span class="line">11000</span><br><span class="line">11000</span><br><span class="line">00100</span><br><span class="line">00011</span><br><span class="line">输出: 3</span><br><span class="line">解释: 每座岛屿只能由水平和&#x2F;或竖直方向上相邻的陆地连接而成。</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析</strong>：</p>
+<p>题目需要求的是网格中<strong>岛屿的数量</strong>，我们看到题目就应该能联想到咋们的 <em>FloodFill</em> 算法了。对于每一个点来说，我们需要记录它是否<strong>被访问过</strong>，并且它是否是一个<strong>陆地</strong>。而如果是一个陆地的话，通过算法找到连接该陆地的<strong>所有陆地</strong>，这就是一个岛屿。</p>
+<p>接着我们直接遍历就可以了。</p>
+<p><strong>题目代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] pos = &#123;&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;-<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,-<span class="number">1</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">boolean</span>[][] isVisited;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numIslands</span><span class="params">(<span class="keyword">char</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        n = grid.length;</span><br><span class="line">        <span class="keyword">if</span>( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        m = grid[<span class="number">0</span>].length;</span><br><span class="line">        isVisited = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][m];</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++ )&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++ )&#123;</span><br><span class="line">                <span class="keyword">if</span>( grid[i][j] == <span class="string">'1'</span> &amp;&amp; !isVisited[i][j] )&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    dfs(i,j,grid);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">( <span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">char</span>[][] grid )</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> newx = x + pos[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> newy = y + pos[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>( isin(newx,newy) &amp;&amp; </span><br><span class="line">            !isVisited[newx][newy] &amp;&amp; grid[newx][newy] == <span class="string">'1'</span> )&#123;</span><br><span class="line">                isVisited[newx][newy] = <span class="keyword">true</span>;</span><br><span class="line">                dfs( newx,newy,grid );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isin</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x &gt;= <span class="number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/04/19/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/" class="article-date">
+  <time class="dt-published" datetime="2020-04-19T11:30:44.000Z" itemprop="datePublished">2020-04-19</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/04/22/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【LeetCode题解】二叉树的层次遍历、二叉树的右视图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/18/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%20I,II/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】不同路径 I,II</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

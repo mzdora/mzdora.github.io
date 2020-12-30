@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>【LeetCode题解】数组中的逆序对 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天想谈谈归并排序，归并排序作为一个高级排序，是比较抽象且严谨的。  关于归并排序的基础：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1t741147BX?p&#x3D;6 归并排序的实现代码：https:&#x2F;&#x2F;github.com&#x2F;mzdora&#x2F;DataStructure&#x2F;blob&#x2F;master&#x2F;Sorting&#x2F;MergeSort&#x2F;MergeSort.java  在我们了解完归并排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LeetCode题解】数组中的逆序对">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="今天想谈谈归并排序，归并排序作为一个高级排序，是比较抽象且严谨的。  关于归并排序的基础：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1t741147BX?p&#x3D;6 归并排序的实现代码：https:&#x2F;&#x2F;github.com&#x2F;mzdora&#x2F;DataStructure&#x2F;blob&#x2F;master&#x2F;Sorting&#x2F;MergeSort&#x2F;MergeSort.java  在我们了解完归并排序">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-24T08:19:34.000Z">
+<meta property="article:modified_time" content="2020-04-24T08:19:34.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-【LeetCode题解】数组中的逆序对" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【LeetCode题解】数组中的逆序对
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <blockquote>
+<p>今天想谈谈归并排序，归并排序作为一个高级排序，是比较抽象且严谨的。</p>
+</blockquote>
+<p><strong>关于归并排序的基础</strong>：<a href="https://www.bilibili.com/video/BV1t741147BX?p=6" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1t741147BX?p=6</a></p>
+<p><strong>归并排序的实现代码</strong>：<a href="https://github.com/mzdora/DataStructure/blob/master/Sorting/MergeSort/MergeSort.java" target="_blank" rel="noopener">https://github.com/mzdora/DataStructure/blob/master/Sorting/MergeSort/MergeSort.java</a></p>
+<hr>
+<p>在我们了解完归并排序之后，我们接下来看这么一道题。</p>
+<p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/</a></p>
+<p><strong>题目描叙</strong>：在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,5,6,4]</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 &lt;&#x3D; 数组长度 &lt;&#x3D; 50000</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目分析：</strong></p>
+<ol>
+<li><p>暴力解法很简单，只需要两个循环，判断 <em>nums[i]</em> 是否大于 <em>nums[j]</em>，然后维护<em>Count</em>的个数就好了。</p>
+</li>
+<li><p>有意思的是，我们用归并排序可以在时间复杂度为O(nlogn)的情况下完成。然后我们需要在“治”的过程对每一次子数组的合并中考虑<strong>逆数对(关键在于「合并两个有序数组」的步骤，利用数组的部分有序性)</strong>。</p>
+<p>所有的「逆序对」来源于 3 个部分：</p>
+<ul>
+<li>左边区间的逆序对；</li>
+<li>右边区间的逆序对；</li>
+<li>横跨两个区间的逆序对。</li>
+</ul>
+</li>
+</ol>
+<p><strong>题目代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reversePairs</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( nums.length == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">return</span> sort(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>,temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span>[] temp)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( left == right ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (left + right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> _left = sort(nums,left,mid,temp);</span><br><span class="line">        <span class="keyword">int</span> _right = sort(nums,mid+<span class="number">1</span>,right,temp);</span><br><span class="line">        <span class="keyword">int</span> _bing = sort(nums,left,mid,right,temp);</span><br><span class="line">        <span class="keyword">return</span> _left + _right + _bing;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> left,<span class="keyword">int</span> mid,<span class="keyword">int</span> right,<span class="keyword">int</span>[] temp)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt;= right; i++) &#123;</span><br><span class="line">            temp[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = left;</span><br><span class="line">        <span class="keyword">int</span> j = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = left; k &lt;= right; k++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == mid + <span class="number">1</span>) &#123;</span><br><span class="line">                nums[k] = temp[j];</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (j == right + <span class="number">1</span>) &#123;</span><br><span class="line">                nums[k] = temp[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temp[i] &lt;= temp[j]) &#123;</span><br><span class="line">                nums[k] = temp[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[k] = temp[j];</span><br><span class="line">                j++;</span><br><span class="line">                count += (mid - i + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/04/24/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/" class="article-date">
+  <time class="dt-published" datetime="2020-04-24T08:19:34.000Z" itemprop="datePublished">2020-04-24</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/05/02/20200502-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%89%8B%E9%80%9F%E5%9C%BA%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20200502-LC双周赛手速场总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/22/%E3%80%90LeetCode%E9%A2%98%E8%A7%A3%E3%80%91%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【LeetCode题解】二叉树的层次遍历、二叉树的右视图</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

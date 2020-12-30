@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201003-LC双周赛总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="T1.设计停车系统题目大意: 停车场i有大中小三种车位若干个,设计一个停车系统,判断停车场是否能停那么多车？如果可以停的话就停进去并输出true，否则输出false。 题目分析: 水题，直接就三个属性走起。 题目答案: 123456789101112131415161718192021222324252627282930313233343536class ParkingSystem &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201003-LC双周赛总结">
+<meta property="og:url" content="http://yoursite.com/2020/10/03/20201003-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="T1.设计停车系统题目大意: 停车场i有大中小三种车位若干个,设计一个停车系统,判断停车场是否能停那么多车？如果可以停的话就停进去并输出true，否则输出false。 题目分析: 水题，直接就三个属性走起。 题目答案: 123456789101112131415161718192021222324252627282930313233343536class ParkingSystem &amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-03T12:40:04.000Z">
+<meta property="article:modified_time" content="2020-10-03T12:40:04.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201003-LC双周赛总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201003-LC双周赛总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h1 id="T1-设计停车系统"><a href="#T1-设计停车系统" class="headerlink" title="T1.设计停车系统"></a>T1.设计停车系统</h1><p>题目大意:</p>
+<p>停车场i有大中小三种车位若干个,设计一个停车系统,判断停车场是否能停那么多车？如果可以停的话就停进去并输出true，否则输出false。</p>
+<p>题目分析:</p>
+<p>水题，直接就三个属性走起。</p>
+<p>题目答案:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParkingSystem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> big;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> medium;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> small;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParkingSystem</span><span class="params">(<span class="keyword">int</span> big, <span class="keyword">int</span> medium, <span class="keyword">int</span> small)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.big = big;</span><br><span class="line">        <span class="keyword">this</span>.medium = medium;</span><br><span class="line">        <span class="keyword">this</span>.small = small;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addCar</span><span class="params">(<span class="keyword">int</span> carType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(carType == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(big&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                big--;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(carType == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(medium&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                medium--;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(small&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                small--;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your ParkingSystem object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * ParkingSystem obj = new ParkingSystem(big, medium, small);</span></span><br><span class="line"><span class="comment"> * boolean param_1 = obj.addCar(carType);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="T2-警告一小时内使用相同员工卡大于等于三次的人"><a href="#T2-警告一小时内使用相同员工卡大于等于三次的人" class="headerlink" title="T2.警告一小时内使用相同员工卡大于等于三次的人"></a>T2.警告一小时内使用相同员工卡大于等于三次的人</h1><p>题目大意:</p>
+<p>有两个String数组,一个存储人名,另一个存储打卡时间(HH:mm)格式。</p>
+<p>如果一个人在一个小时内打卡了三次,就会被警告。</p>
+<p>返回<strong>去重</strong>后的收到系统警告的员工名字，将它们按 <strong>字典序升序</strong> 排序后返回。</p>
+<p>(请注意 <code>&quot;10:00&quot;</code> - <code>&quot;11:00&quot;</code> 视为一个小时时间范围内，而 <code>&quot;23:51&quot;</code> - <code>&quot;00:10&quot;</code> 不被视为一小时内)</p>
+<p>题目分析:</p>
+<p>用一个HashMap&lt;String,List*String&gt;来存储数据。以Name为Key,打卡时间的list为Value。</p>
+<p>多用Collections.Sort()去排序。</p>
+<p>题目答案:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DateFormat;</span><br><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; result;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">alertNames</span><span class="params">(String[] keyName, String[] keyTime)</span> </span>&#123;</span><br><span class="line">        result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        HashMap&lt;String,List&lt;String&gt;&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;keyName.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!map.containsKey(keyName[i]))&#123;</span><br><span class="line">                map.put(keyName[i],<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">                map.get(keyName[i]).add(keyTime[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                map.get(keyName[i]).add(keyTime[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String,List&lt;String&gt;&gt; entry : map.entrySet()) &#123;</span><br><span class="line">            <span class="keyword">if</span>(vetify(entry.getValue()))&#123;</span><br><span class="line">                result.add(entry.getKey());</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">        Collections.sort(result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">vetify</span><span class="params">(List&lt;String&gt; arr)</span></span>&#123;</span><br><span class="line">        Collections.sort(arr);</span><br><span class="line">        <span class="keyword">if</span>(arr.size()&lt;<span class="number">3</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;arr.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(timediff(arr.get(i-<span class="number">2</span>),arr.get(i)))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">timediff</span><span class="params">(String time1,String time2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> re1 = (<span class="keyword">int</span>)time1.charAt(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> re2 = (<span class="keyword">int</span>)time2.charAt(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(re1&gt;re2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        DateFormat df = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"HH:mm"</span>);</span><br><span class="line">        <span class="keyword">long</span> minutes = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Date d1 = df.parse(time1);</span><br><span class="line">            Date d2 = df.parse(time2);</span><br><span class="line">            <span class="keyword">long</span> diff = Math.abs(d1.getTime() - d2.getTime());</span><br><span class="line">            minutes = diff / (<span class="number">1000</span> * <span class="number">60</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"error"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minutes&lt;=<span class="number">60</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="T3-给定行和列的和求可行矩阵"><a href="#T3-给定行和列的和求可行矩阵" class="headerlink" title="T3.给定行和列的和求可行矩阵"></a>T3.给定行和列的和求可行矩阵</h1><p>题目大意：</p>
+<p>要求:你不知道矩阵里的每个元素，但是你知道每一行和每一列的和。</p>
+<p>请找到大小为 rowSum.length x colSum.length 的任意 <strong>非负整数</strong> 矩阵，且该矩阵满足要求。</p>
+<p>请你返回任意一个满足题目要求的二维矩阵，题目保证存在 <strong>至少一个</strong> 可行矩阵。</p>
+<p>题目分析:</p>
+<p>贪心，两个for循环就搞定了。</p>
+<p>题目答案:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] restoreMatrix(<span class="keyword">int</span>[] rowSum, <span class="keyword">int</span>[] colSum) &#123;</span><br><span class="line">        <span class="keyword">int</span>[][] result = <span class="keyword">new</span> <span class="keyword">int</span>[rowSum.length][colSum.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;rowSum.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;colSum.length;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> val = Math.min(rowSum[i],colSum[j]);</span><br><span class="line">                rowSum[i] -= val;</span><br><span class="line">                colSum[j] -= val;</span><br><span class="line">                result[i][j] = val;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="T4-放弃"><a href="#T4-放弃" class="headerlink" title="T4.放弃"></a>T4.放弃</h1>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/10/03/20201003-LC%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-10-03T12:40:04.000Z" itemprop="datePublished">2020-10-03</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/10/07/Lover/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Lover
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/30/%E6%8D%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%95%A6/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">换新电脑啦</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

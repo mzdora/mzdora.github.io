@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>20201202-基础题总结 | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简述操作系统中的缺页中断 缺页中断指的是当软件试图访问已映射在虚拟地址空间中，但是目前并未被加载在物理内存中的一个分页时，由中央处理器的内存管理单元所发出的中断。 进程运行过程中，如果发生缺页中断，为了能够把所缺的页面装入内存，系统必须从内存中选择一页调出到磁盘的对换区。但此时应该把那个页面换出，则需要根据一定的页面置换算法来确定。 1.最佳置换（Optimal， OPT) 置换以后不再被访问，或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20201202-基础题总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/02/20201202-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="简述操作系统中的缺页中断 缺页中断指的是当软件试图访问已映射在虚拟地址空间中，但是目前并未被加载在物理内存中的一个分页时，由中央处理器的内存管理单元所发出的中断。 进程运行过程中，如果发生缺页中断，为了能够把所缺的页面装入内存，系统必须从内存中选择一页调出到磁盘的对换区。但此时应该把那个页面换出，则需要根据一定的页面置换算法来确定。 1.最佳置换（Optimal， OPT) 置换以后不再被访问，或">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-02T06:55:42.000Z">
+<meta property="article:modified_time" content="2020-12-02T06:55:42.000Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-20201202-基础题总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/09/30/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20201202-基础题总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <p><strong>简述操作系统中的缺页中断</strong></p>
+<p>缺页中断指的是当软件试图访问已映射在虚拟地址空间中，但是目前并未被加载在物理内存中的一个分页时，由中央处理器的内存管理单元所发出的中断。</p>
+<p>进程运行过程中，如果发生缺页中断，为了能够把所缺的页面装入内存，系统必须从内存中选择一页调出到磁盘的对换区。但此时应该把那个页面换出，则需要根据一定的<strong>页面置换算法</strong>来确定。</p>
+<p><strong>1.最佳置换（Optimal， OPT)</strong></p>
+<p>置换以后不再被访问，或者在将来最迟才回被访问的页面，缺页中断率最低。但是该算法需要依据以后各业的使用情况，而当一个进程还未运行完成是，很难估计哪一个页面是以后不再使用或在最长时间以后才会用到的页面。所以该算法是不能实现的。但该算法仍然有意义，作为很亮其他算法优劣的一个标准。</p>
+<p><strong>2.先进先出置换算法（First In First Out, FIFO)</strong></p>
+<p>置换最先调入内存的页面，即置换在内存中驻留时间最久的页面。按照进入内存的先后次序排列成队列，从队尾进入，从队首删除。但是该算法会淘汰经常访问的页面，不适应进程实际运行的规律，目前已经很少使用。</p>
+<p><strong>3.最近最久未使用置换算法（Least Recently Used， LRU）</strong></p>
+<p>置换最近一段时间以来最长时间未访问过的页面。根据程序局部性原理，刚被访问的页面，可能马上又要被访问；而较长时间内没有被访问的页面，可能最近不会被访问。<br>LRU算法普偏地适用于各种类型的程序，但是系统要时时刻刻对各页的访问历史情况加以记录和更新，开销太大，因此LRU算法必须要有硬件的支持。</p>
+<p><strong>简述操作系统中 malloc 的实现原理</strong></p>
+<p>malloc可以分别由伙伴系统或基于链表的实现； </p>
+<ol>
+<li><p>它有一个将可用的内存块连接为一个长长的列表的所谓空闲链表；</p>
+</li>
+<li><p>调用malloc函数时，它沿连接表寻找一个大到足以满足用户请求所需要的内存块。然后，将该内存块一分为二（一块的大小与用户请求的大小相等，另一块的大小就是剩下的字节）。接下来，将分配给用户的那块内存传给用户，并将剩下的那块（如果有的话）返回到连接表上。</p>
+</li>
+<li><p>调用free函数时，它将用户释放的内存块连接到空闲链上。到最后，空闲链会被切成很多的小内存片段，如果这时用户申请一个大的内存片段，那么空闲链上可能没有可以满足用户要求的片段了。于是，malloc函数请求延时，并开始在空闲链上翻箱倒柜地检查各内存片段，对它们进行整理，将相邻的小空闲块合并成较大的内存块。 </p>
+</li>
+</ol>
+<p><strong>怎么判断写文件时 Buffer 已经写满？简述 Linux 的 IO模型</strong></p>
+<p>buffer缓冲区实质上就是一块内存，用于写入数据，也供后续再次读取数据。这块内存被NIO Buffer管理，并提供一系列的方法用于更简单的操作这块内存。</p>
+<p>一个Buffer有三个属性是必须掌握的，分别是：</p>
+<ul>
+<li>capacity容量</li>
+<li>position位置</li>
+<li>limit限制</li>
+</ul>
+<p>position和limit的具体含义取决于当前buffer的模式。capacity在两种模式下都表示容量。</p>
+<p>在写模式，limit的含义是我们所能写入的最大数据量。它等同于buffer的容量。一旦切换到读模式，limit则代表我们所能读取的最大数据量，他的值等同于写模式下position的位置。数据读取的上限时buffer中已有的数据，也就是limit的位置（原position所指的位置）。</p>
+<p><strong>Linux下有五种IO模型</strong></p>
+<p><strong>阻塞式IO</strong></p>
+<p>阻塞式IO模型是最一般的IO模型。在这种模型下，IO函数调用（read &amp; write等等）都会在操作完成或者发生中断以后才会返回。如果指定的操作数据没有就绪，或者操作需要的外部条件（比如缓冲区）尚未符合要求，操作会一直阻塞。</p>
+<p><strong>非阻塞式IO</strong></p>
+<p>相对于阻塞式IO模型，非阻塞式IO的特点就是：当所请求的IO操作暂无法如期完成时，不要把本进程投入睡眠时，而是直接返回一个错误（EWOULDBLOCK）。这样做避免了程序长时间被挂起。但是由于在这种模式下，程序需要不断去轮询，会耗费大量的CPU时间。</p>
+<p><strong>IO复用</strong></p>
+<p>IO复用是指在一个IO请求内，等待多个可能的IO对象可用（在unix下由文件描述符来标记）。虽然IO复用还是会导致阻塞，但是当IO操作对象较多时，就能够避免产生很大一部分的阻塞时间。在Unix下，我们可以用select或poll函数实现IO复用。</p>
+<p><strong>信号驱动式IO</strong></p>
+<p>在信号驱动式IO模型下，我们可以让内核在描述符就绪时发送SIGIO信号通知我们。使用这种模型，我们需要首先开启套接字的信号驱动式IO功能，并通过sigaction系统调用来安装一个信号处理函数。</p>
+<p><strong>异步IO</strong></p>
+<p>异步IO的特点是：让内核启动某个IO操作，并让内核在这个操作完成后通知我们。在这期间，调用异步IO操作的进程不会被阻塞。</p>
+<p>异步IO与信号驱动式IO的区别在于：信号驱动式IO是由内核通知我们何时可以启动IO操作，而异步IO模型是由内核通知我们操作何时完成。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2020/12/02/20201202-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-12-02T06:55:42.000Z" itemprop="datePublished">2020-12-02</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2020/12/02/20201119-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20201119-基础题总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/28/20201128-%E5%9F%BA%E7%A1%80%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20201128-基础题总结</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
