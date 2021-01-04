@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>OSTEP 笔记(二) | Mzdora&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是受限直接执行直接执行指的是程序直接在硬件CPU上执行。 但是会有问题：如果进程希望执行某种受限操作(例如访问IO)怎么办？ 问题一：受限制的操作： 可以引入一种新的处理器模式，称为用户模式。在用户模式下运行的代码会受到限制。与用户模式不同的内核模式，操作系统就以这种模式运行。然后通过系统调用来实现用户模式对内核的访问。 要执行系统调用，程序必须执行特殊的陷阱指令，该指令同时跳入内核并将权限级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSTEP 笔记(二)">
+<meta property="og:url" content="http://yoursite.com/2021/01/04/OSTEP%20%E7%AC%94%E8%AE%B0(%E4%BA%8C)/index.html">
+<meta property="og:site_name" content="Mzdora&#39;s">
+<meta property="og:description" content="什么是受限直接执行直接执行指的是程序直接在硬件CPU上执行。 但是会有问题：如果进程希望执行某种受限操作(例如访问IO)怎么办？ 问题一：受限制的操作： 可以引入一种新的处理器模式，称为用户模式。在用户模式下运行的代码会受到限制。与用户模式不同的内核模式，操作系统就以这种模式运行。然后通过系统调用来实现用户模式对内核的访问。 要执行系统调用，程序必须执行特殊的陷阱指令，该指令同时跳入内核并将权限级">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-04T09:41:43.866Z">
+<meta property="article:modified_time" content="2021-01-04T10:26:55.117Z">
+<meta property="article:author" content="Mzdora">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/typing.css">
+
+  
+<link rel="stylesheet" href="/css/donate.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+    
+      <body class="dark">
+    
+  
+      <div id="container" class="container">
+        <article id="post-OSTEP 笔记(二)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header id="header" class="header">
+  <nav class="mobile-nav">
+    <h1 class="nickname">Mzdora&#39;s</h1>
+    <ul class="mobile-nav-menu">
+      <label for="mobile-menu-toggle"><a id="menu-button">&#9776; Menu</a></label>
+      <input type="checkbox" id="mobile-menu-toggle"/>
+      <ul class="mobile-nav-link">
+        
+        <a href="/">Home</a>
+        
+        <a href="/archives">Archives</a>
+        
+        <a href="http://mzdora.info/2020/08/09/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+        
+      </ul>
+    </ul>
+  </nav>
+	
+		<nav id="main-nav" class="main-nav nav-left">
+	
+	
+	  <a class="main-nav-link" href="/">Home</a>
+	
+	  <a class="main-nav-link" href="/archives">Archives</a>
+	
+	  <a class="main-nav-link" href="http://mzdora.info/2020/08/09/%E6%88%91%E6%98%AF%E8%B0%81/" target="_blank" rel="noopener">About</a>
+	
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      OSTEP 笔记(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry typo" itemprop="articleBody">
+      
+        <h1 id="什么是受限直接执行"><a href="#什么是受限直接执行" class="headerlink" title="什么是受限直接执行"></a>什么是受限直接执行</h1><p>直接执行指的是程序直接在硬件CPU上执行。</p>
+<p>但是会有问题：如果进程希望执行某种受限操作(例如访问IO)怎么办？</p>
+<p><strong>问题一：受限制的操作：</strong></p>
+<p>可以引入一种新的处理器模式，称为<strong>用户模式</strong>。在用户模式下运行的代码会受到限制。与用户模式不同的<strong>内核模式</strong>，操作系统就以这种模式运行。然后通过<strong>系统调用</strong>来实现用户模式对内核的访问。</p>
+<p>要执行系统调用，程序必须执行特殊的<strong>陷阱指令</strong>，该指令同时跳入内核并将权限级别改为内核模式，完成后，操作系统调用一个特殊的从陷阱返回指令以回到用户模式。</p>
+<p><strong>陷阱如何知道在OS内运行了哪些代码？</strong></p>
+<p>内核通过在启动时设置<strong>陷阱表</strong>来实现。操作系统告诉硬件发生某件异常事件时要运行哪些代码。</p>
+<table>
+<thead>
+<tr>
+<th>内核（启动）</th>
+<th>硬件</th>
+<th>用户</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化陷阱表</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>记住系统调用处理程序的地址</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>内核（运行）</strong></td>
+<td><strong>硬件</strong></td>
+<td><strong>用户</strong></td>
+</tr>
+<tr>
+<td>在进程列表创建条目，为程序分配内存，将程序加载在内存中，根据argv分配程序栈，用寄存器/程序计数器填充内核栈，从陷阱返回。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>从内核恢复寄存器，转向用户模式，跳到main</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>运行main，调用系统调用，陷入操作系统</td>
+</tr>
+<tr>
+<td></td>
+<td>将寄存器保存到内核栈，转向内核模式，跳到陷阱处理程序</td>
+<td></td>
+</tr>
+<tr>
+<td>处理陷阱，做系统调用的工作，从陷阱返回</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>从内核栈恢复寄存器，转到用户模式，跳到陷阱之后的程序计数器</td>
+<td></td>
+</tr>
+<tr>
+<td>释放内存，将进程从进程列表中删除</td>
+<td></td>
+<td>从main返回</td>
+</tr>
+</tbody></table>
+<p><strong>问题二：在进程之间切换：</strong></p>
+<p>操作系统如何重新获得CPU的控制权，以便它可以在进程之间切换？</p>
+<p><strong>协作方式 —— 等待系统调用：</strong></p>
+<p>在协作调度系统中，OS通过等待系统调用，或某种非法操作产生，从而重新获得CPU的控制权。</p>
+<p><strong>非协作方式 —— 时钟中断：</strong></p>
+<p>时钟设备可以每隔一段时间产生一次中断。产生中断时，当前正在运行的进程停止，操作系统运行中断处理程序，此时操作系统会重新获得CPU的控制权。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2021/01/04/OSTEP%20%E7%AC%94%E8%AE%B0(%E4%BA%8C)/" class="article-date">
+  <time class="dt-published" datetime="2021-01-04T09:41:43.866Z" itemprop="datePublished">2021-01-04</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2020/12/30/OSTEP%20%E7%AC%94%E8%AE%B0(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OSTEP 笔记(一)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>我反抗，故我存在。</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/typing.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

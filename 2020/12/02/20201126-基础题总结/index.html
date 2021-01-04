@@ -13,7 +13,7 @@
 <meta property="og:description" content="简述 socket 中 select 与 epoll 的使用场景以及区别，epoll 中水平触发以及边缘触发有什么不同？ (1)select&#x3D;&#x3D;&gt;时间复杂度O(n) 它仅仅知道了，有I&#x2F;O事件发生了，却并不知道是哪那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。所以select具有O(n)的无差别轮询复杂度，同时处理的流越多">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-02T07:18:48.000Z">
-<meta property="article:modified_time" content="2020-12-02T07:18:48.000Z">
+<meta property="article:modified_time" content="2021-01-04T11:30:37.899Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
   
@@ -108,7 +108,14 @@
 <li><strong>先到先服务(FCFS)调度算法</strong> : 从就绪队列中选择一个最先进入该队列的进程为之分配资源，使它立即执行并一直执行到完成或发生某事件而被阻塞放弃占用 CPU 时再重新调度。</li>
 <li><strong>短作业优先(SJF)的调度算法</strong> : 从就绪队列中选出一个估计运行时间最短的进程为之分配资源，使它立即执行并一直执行到完成或发生某事件而被阻塞放弃占用 CPU 时再重新调度。</li>
 <li><strong>时间片轮转调度算法</strong> : 时间片轮转调度是一种最古老，最简单，最公平且使用最广的算法，又称 RR(Round robin)调度。每个进程被分配一个时间段，称作它的时间片，即该进程允许运行的时间。</li>
-<li><strong>多级反馈队列调度算法</strong> ：前面介绍的几种进程调度的算法都有一定的局限性。如<strong>短进程优先的调度算法，仅照顾了短进程而忽略了长进程</strong> 。多级反馈队列调度算法既能使高优先级的作业得到响应又能使短作业（进程）迅速完成。，因而它是目前<strong>被公认的一种较好的进程调度算法</strong>，UNIX 操作系统采取的便是这种调度算法。</li>
+<li><strong>多级反馈队列调度算法</strong> ：前面介绍的几种进程调度的算法都有一定的局限性。如<strong>短进程优先的调度算法，仅照顾了短进程而忽略了长进程</strong> 。多级反馈队列调度算法既能使高优先级的作业得到响应又能使短作业（进程）迅速完成。，因而它是目前<strong>被公认的一种较好的进程调度算法</strong>，UNIX 操作系统采取的便是这种调度算法。<ul>
+<li>规则1: A优先级&gt;B优先级 执行A</li>
+<li>规则2: A优先级=B优先级 A和B轮转执行</li>
+<li>规则3: 工作进入系统时，放在最高优先级</li>
+<li>规则4: 一旦工作用完了在某一层中的时间配额，就降低优先级</li>
+<li>规则5: 经过一段时间S，就将系统中的所有工作重新加入最高优先级</li>
+</ul>
+</li>
 <li><strong>优先级调度</strong> ： 为每个流程分配优先级，首先执行具有最高优先级的进程，依此类推。具有相同优先级的进程以 FCFS 方式执行。可以根据内存要求，时间要求或任何其他资源要求来确定优先级。</li>
 </ul>
 <p><strong>操作系统如何申请以及管理内存的？</strong></p>
