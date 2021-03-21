@@ -13,7 +13,7 @@
 <meta property="og:description" content="T1:数组异或操作  给你两个整数，n 和 start 。 数组 nums 定义为：nums[i] &#x3D; start + 2*i（下标从 0 开始）且 n &#x3D;&#x3D; nums.length 。 请返回 nums 中所有元素按位异或（XOR）后得到的结果。 示例 1： 1234输入：n &#x3D; 5, start &#x3D; 0输出：8解释：数组 nums 为 [0, 2, 4, 6, 8]，其中">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-20T21:32:42.000Z">
-<meta property="article:modified_time" content="2020-06-20T21:32:42.000Z">
+<meta property="article:modified_time" content="2021-03-07T13:42:19.901Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
   
@@ -114,8 +114,6 @@
 <p><strong>题目代码:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">xorOperation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            nums[i] = start + <span class="number">2</span>*i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            result ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <h3>T2:保证文件名唯一</h3>
 
 <p>给你一个长度为 <code>n</code> 的字符串数组 <code>names</code> 。你将会在文件系统中创建 <code>n</code> 个文件夹：在第 <code>i</code> 分钟，新建名为 <code>names[i]</code> 的文件夹。</p>
@@ -136,8 +134,6 @@
 <p><strong>示例 5：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：names &#x3D; [&quot;kaido&quot;,&quot;kaido(1)&quot;,&quot;kaido&quot;,&quot;kaido(1)&quot;]</span><br><span class="line">输出：[&quot;kaido&quot;,&quot;kaido(1)&quot;,&quot;kaido(2)&quot;,&quot;kaido(1)(1)&quot;]</span><br><span class="line">解释：注意，如果含后缀文件名被占用，那么系统也会按规则在名称后添加新的后缀 (k) 。</span><br></pre></td></tr></table></figure>
 
-
-
 <p><strong>提示：</strong></p>
 <ul>
 <li><code>1 &lt;= names.length &lt;= 5 * 10^4</code></li>
@@ -152,8 +148,6 @@
 
 <p><strong>AC的版本:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String[] getFolderNames(String[] names) &#123;</span><br><span class="line">        HashMap&lt;String,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        String[] result = <span class="keyword">new</span> String[names.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;names.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( !map.containsKey(names[i]) )&#123;</span><br><span class="line">                result[i] = names[i];</span><br><span class="line">                map.put(names[i],<span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">while</span>( map.containsKey(names[i] + <span class="string">"("</span> + map.get(names[i]) + <span class="string">")"</span>) )&#123;</span><br><span class="line">                    map.put(names[i],map.get(names[i])+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                result[i] = names[i] + <span class="string">"("</span> + map.get(names[i]) + <span class="string">")"</span>;</span><br><span class="line">                map.put(result[i],<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 
 <h3>T3:避免洪水泛滥</h3>
 
@@ -171,7 +165,7 @@
 </ul>
 <p>如果有多种可行解，请返回它们中的 <strong>任意一个</strong> 。如果没办法阻止洪水，请返回一个 <strong>空的数组</strong> 。</p>
 <p>请注意，如果你选择抽干一个装满水的湖泊，它会变成一个空的湖泊。但如果你选择抽干一个空的湖泊，那么将无事发生（详情请看示例 4）。</p>
-<p> <strong>示例 1：</strong></p>
+<p><strong>示例 1：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [1,2,3,4]</span><br><span class="line">输出：[-1,-1,-1,-1]</span><br><span class="line">解释：第一天后，装满水的湖泊包括 [1]</span><br><span class="line">第二天后，装满水的湖泊包括 [1,2]</span><br><span class="line">第三天后，装满水的湖泊包括 [1,2,3]</span><br><span class="line">第四天后，装满水的湖泊包括 [1,2,3,4]</span><br><span class="line">没有哪一天你可以抽干任何湖泊的水，也没有湖泊会发生洪水。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
@@ -185,8 +179,6 @@
 
 <p><strong>示例 5：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：rains &#x3D; [10,20,20]</span><br><span class="line">输出：[]</span><br><span class="line">解释：由于湖泊 20 会连续下 2 天的雨，所以没有没有办法阻止洪水。</span><br></pre></td></tr></table></figure>
-
-
 
 <p><strong>提示：</strong></p>
 <ul>

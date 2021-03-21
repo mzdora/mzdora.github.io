@@ -14,7 +14,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/mzdora/photobed/blob/master/20200809sqltransaction.png?raw=true">
 <meta property="article:published_time" content="2020-08-09T14:26:26.000Z">
-<meta property="article:modified_time" content="2020-08-09T14:26:26.000Z">
+<meta property="article:modified_time" content="2021-03-07T13:42:19.516Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/mzdora/photobed/blob/master/20200809sqltransaction.png?raw=true">
@@ -122,8 +122,6 @@
 
 <p>最后咋们可以进行测试:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    List&lt;GoodsDTO&gt; select = sqlSession.selectList(<span class="string">"selectGoodsDTO"</span>);</span><br><span class="line">    <span class="keyword">for</span> (GoodsDTO goodsDTO : select) &#123;</span><br><span class="line">        System.out.println(goodsDTO);</span><br><span class="line">    &#125;</span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 
 </li>
 </ul>

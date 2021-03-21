@@ -14,7 +14,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg">
 <meta property="article:published_time" content="2020-04-18T08:07:54.000Z">
-<meta property="article:modified_time" content="2020-04-18T08:07:54.000Z">
+<meta property="article:modified_time" content="2021-03-07T13:42:19.561Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg">
@@ -96,7 +96,7 @@
 </blockquote>
 <p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/container-with-most-water/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/container-with-most-water/</a></p>
 <p><strong>题目描叙</strong>：</p>
-<p>给你 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+<p>给你 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x<br>轴共同构成的容器可以容纳最多的水。</p>
 <p><strong>说明</strong>：你不能倾斜容器，且 n 的值至少为 2。</p>
 <img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img" style="zoom: 50%;" />
 
@@ -105,8 +105,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,8,6,2,5,4,8,3,7]</span><br><span class="line">输出：49</span><br></pre></td></tr></table></figure>
 
 <p><strong>题目分析</strong>：</p>
-<p>我们看到这种数组题，第一反应应该就是<strong>双指针</strong>了。如果你现在脑袋里反应不过来需要用<strong>双指针</strong>的话，证明你刷题刷得还不够多。我们首先把<strong>左指针</strong>放在数组的 <em>height[0]</em> 位置，然后把右指针放在数组的 <em>height[height.length -1]</em> 的位置(保证在边界内)。</p>
-<p>接着我们考虑笛卡尔坐标系的<strong>x轴</strong>，因为我们的双指针技巧是对左右指针<strong>不断维护</strong>的。所以我们的<strong>x轴的长度也需要不断维护</strong>。最开始的时候，我们的长度是 <em>len = height.length -1</em> 。然后每一次维护呢就对其 <em>len -= 1</em> 。</p>
+<p>我们看到这种数组题，第一反应应该就是<strong>双指针</strong>了。如果你现在脑袋里反应不过来需要用<strong>双指针</strong>的话，证明你刷题刷得还不够多。我们首先把<strong>左指针</strong>放在数组的 <em>height[0]</em> 位置，然后把右指针放在数组的 *<br>height[height.length -1]* 的位置(保证在边界内)。</p>
+<p>接着我们考虑笛卡尔坐标系的<strong>x轴</strong>，因为我们的双指针技巧是对左右指针<strong>不断维护</strong>的。所以我们的<strong>x轴的长度也需要不断维护</strong>。最开始的时候，我们的长度是 <em>len = height.length -1</em><br>。然后每一次维护呢就对其 <em>len -= 1</em> 。</p>
 <p>明白上面的描叙之后，那么我们的最大面积理所当然的也通过这样的循环不断地被维护。</p>
 <p><strong>题目代码</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = height.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> len = height.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxarea = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>( left &lt;= right )&#123;</span><br><span class="line">            <span class="keyword">if</span>( height[left] &lt; height[right] )&#123;</span><br><span class="line">                maxarea = Math.max( maxarea,height[left]*len );</span><br><span class="line">                left++;</span><br><span class="line">                len --;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                maxarea = Math.max( maxarea,height[right]*len );</span><br><span class="line">                right--;</span><br><span class="line">                len --;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxarea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

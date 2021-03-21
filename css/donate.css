@@ -1,20 +1,24 @@
 #donate {
   font-weight: 900;
   line-height: 1.8em;
-  text-shadow: 0 0 1px rgba(255,255,255,0.1);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   display: block;
   position: relative;
   margin: 70px 0 0 0;
   padding: 0;
 }
 
-#donate img {border-width: 0px;}
-#donate a{
+#donate img {
+  border-width: 0px;
+}
+
+#donate a {
   color: #000;
   text-decoration: none;
-  outline:none;
-  border:none;
+  outline: none;
+  border: none;
 }
+
 #donate .list,
 #donate .list li,
 #donate .list-left li {
@@ -23,20 +27,25 @@
   margin: 0px;
   padding: 0px;
 }
+
 #donate .pos-f {
   position: absolute;
 }
+
 #donate .left-100 {
   width: 100%;
   height: 100%;
 }
+
 #donate .blur {
   -webkit-filter: blur(3px);
   filter: blur(3px);
 }
+
 #donate .tr3 {
   transition: all .3s;
 }
+
 #DonateText {
   position: absolute;
   font-size: 12px;
@@ -51,8 +60,9 @@
   left: calc(50% - 120px);
   top: calc(50% - 60px);
   z-index: -1;
-  transform: rotatez(-15deg );
+  transform: rotatez(-15deg);
 }
+
 #donateBox {
   left: calc(50% - 150px);
   top: calc(50% - 15px);
@@ -64,13 +74,14 @@
   float: left;
   z-index: 1;
 }
+
 #donateBox li {
   width: 74px;
   float: left;
   text-align: center;
   border-left: 1px solid #ddd;
   background: no-repeat center center;
-  background-color: rgba(204, 217, 220,0.1);
+  background-color: rgba(204, 217, 220, 0.1);
   background-size: 45px;
   transition: all .3s;
   cursor: pointer;
@@ -81,46 +92,57 @@
   filter: grayscale(1);
   opacity: 0.5;
 }
+
 #donateBox li:hover {
-  background-color: rgba(204, 217, 220,0.3);
+  background-color: rgba(204, 217, 220, 0.3);
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
   opacity: 1;
 }
-#donateBox>li:first-child {
+
+#donateBox > li:first-child {
   border-width: 0;
 }
+
 #donateBox a {
   display: block;
 }
+
 #donateBox #PayPal {
   background-image: url(../images/paypal.svg);
 }
-#donateBox>#BTC {
+
+#donateBox > #BTC {
   background-image: url(../images/bitcoin.svg);
   line-height: 28px;
 }
-#donateBox>#BTC:hover {
+
+#donateBox > #BTC:hover {
   overflow: visible;
 }
-#BTC>button {
+
+#BTC > button {
   opacity: 0;
   cursor: pointer;
 }
+
 #donateBox #AliPay {
   background-image: url(../images/alipay.svg);
 }
+
 #donateBox #WeChat {
   background-image: url(../images/wechat.svg);
 }
+
 #QRBox {
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   display: none;
   perspective: 400px;
 }
+
 #donate .MainBox {
   cursor: pointer;
   position: absolute;
@@ -132,13 +154,14 @@
   background: #fff no-repeat center center;
   background-size: 190px;
   border-radius: 6px;
-  box-shadow: 0px 2px 7px rgba(0,0,0,0.3);
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.3);
   opacity: 0;
   transition: all 1s ease-in-out;
   transform-style: preserve-3d;
   transform-origin: center center;
   overflow: hidden;
 }
+
 #donate #btc-key {
   opacity: 0;
   width: 2px;
@@ -147,6 +170,7 @@
   left: -2px;
   top: -8px;
 }
+
 #donate #github {
   width: 24px;
   height: 24px;
@@ -155,28 +179,32 @@
   background: no-repeat center center url(../images/github.svg);
   background-size: contain;
   opacity: 0.3;
-  transform: rotatez(15deg );
+  transform: rotatez(15deg);
 }
+
 #donate [data-footnote] {
   position: relative;
   overflow: hidden;
 }
+
 #donate [data-footnote]:hover {
   overflow: visible;
 }
+
 #donate [data-footnote]::before,
 #donate [data-footnote]::after {
   position: absolute;
   transition: all .3s;
-  transform: translate3d(-50%,0,0);
+  transform: translate3d(-50%, 0, 0);
   opacity: 0;
   left: 37px;
   z-index: 10;
 }
+
 #donate [data-footnote]::before {
   content: attr(data-footnote);
   border-radius: 6px;
-  background-color: rgba(100,100,100,0.8);
+  background-color: rgba(100, 100, 100, 0.8);
   color: #fff;
   height: 24px;
   line-height: 24px;
@@ -186,31 +214,35 @@
   top: -24px;
   left: 37px;
 }
+
 #donate [data-footnote]::after {
   content: '';
   border: 5px solid #333;
-  border-color: rgba(100,100,100,0.8) transparent transparent transparent;
+  border-color: rgba(100, 100, 100, 0.8) transparent transparent transparent;
   top: 0;
   left: 37px;
 }
+
 #donate [data-footnote]:hover::before,
 #donate [data-footnote]:hover::after {
   opacity: 1;
 }
+
 #donate [data-footnote]:hover::before,
 #donate [data-footnote]:hover::after {
-  transform: translate3d(-50%,-7px,0);
+  transform: translate3d(-50%, -7px, 0);
 }
 
 #donate .MainBox.showQR {
   opacity: 1;
   animation-name: showQR;
-  animation-duration:3s;
-  animation-timing-function:ease-in-out;
-  animation-iteration-count:1;
-  animation-fill-mode:forwards;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
   -webkit-animation: showQR 3s ease-in-out 0s 1 normal forwards;
 }
+
 @keyframes showQR {
   from {
     transform: rotateX(90deg);
@@ -251,24 +283,26 @@
     opacity: 1;
   }
 }
+
 #donate .MainBox.hideQR {
   opacity: 1;
   animation-name: hideQR;
-  animation-duration:0.5s;
-  animation-timing-function:ease-in-out;
-  animation-iteration-count:1;
-  animation-fill-mode:forwards;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
   -webkit-animation: hideQR 0.5s ease-in-out 0s 1 normal forwards;
 }
+
 @keyframes hideQR {
   from {
   }
-  20%,50% {
-    transform: scale(1.08,1.08);
+  20%, 50% {
+    transform: scale(1.08, 1.08);
     opacity: 1;
   }
   to {
     opacity: 0;
-    transform: rotateZ(40deg) scale(0.6,0.6);
+    transform: rotateZ(40deg) scale(0.6, 0.6);
   }
 }

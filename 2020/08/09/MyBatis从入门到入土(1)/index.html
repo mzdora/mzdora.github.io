@@ -5,15 +5,15 @@
   
   <title>MyBatis从入门到入土(1) | Mzdora&#39;s</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖  创建核心配置文件  创建实体(Entity)类  创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置">
+  <meta name="description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖 创建核心配置文件 创建实体(Entity)类 创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置 myb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis从入门到入土(1)">
 <meta property="og:url" content="http://yoursite.com/2020/08/09/MyBatis%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F(1)/index.html">
 <meta property="og:site_name" content="Mzdora&#39;s">
-<meta property="og:description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖  创建核心配置文件  创建实体(Entity)类  创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置">
+<meta property="og:description" content="1.介绍MyBatis1.MyBatis是优秀的持久层(DAO)框架 2.MyBatis使用XML将SQL与应用程序解耦，便于维护 3.是JDBC的延伸，快速上手 MyBatis开发流程:  引入MyBatis依赖 创建核心配置文件 创建实体(Entity)类 创建Mapper映射文件 初始化SessionFactory 利用SqlSession对象操作数据  2.MyBatis的环境配置 myb">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-08T23:19:12.000Z">
-<meta property="article:modified_time" content="2020-08-08T23:19:12.000Z">
+<meta property="article:modified_time" content="2021-03-07T13:42:20.029Z">
 <meta property="article:author" content="Mzdora">
 <meta name="twitter:card" content="summary">
   
@@ -93,19 +93,19 @@
 <p>3.是JDBC的延伸，快速上手</p>
 <p><strong>MyBatis开发流程:</strong></p>
 <ul>
-<li>引入MyBatis依赖 </li>
-<li>创建核心配置文件 </li>
-<li>创建实体(Entity)类 </li>
+<li>引入MyBatis依赖</li>
+<li>创建核心配置文件</li>
+<li>创建实体(Entity)类</li>
 <li>创建Mapper映射文件</li>
 <li>初始化SessionFactory</li>
 <li>利用SqlSession对象操作数据</li>
 </ul>
 <h2 id="2-MyBatis的环境配置"><a href="#2-MyBatis的环境配置" class="headerlink" title="2.MyBatis的环境配置"></a>2.MyBatis的环境配置</h2><ol>
-<li><p>mybatis-config.xml (这是核心配置文件)    </p>
+<li><p>mybatis-config.xml (这是核心配置文件)</p>
 <ul>
 <li>用来配置数据库信息</li>
 <li>环境用<environment></environment>标签</li>
-<li>标签包含各种子标签 </li>
+<li>标签包含各种子标签</li>
 <li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mybatis-config.xml" target="_blank" rel="noopener">mybatis-config.xml</a> (这里直接套模板吧)</li>
 </ul>
 </li>
@@ -133,7 +133,7 @@
 <li><p>初始化工具类MyBatisUtils(这就是个工具类，创建全局唯一SqlSessionFactory，用来读取配置文件+创建会话工厂,简化操作)</p>
 <ul>
 <li><p>创建Module com.mzdora.com.utils</p>
-<p> <a href="https://github.com/mzdora/Templates-for-SSM/blob/master/MybatisUtils.java" target="_blank" rel="noopener">MybatisUtils.java</a> (直接拿来用)</p>
+<p><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/MybatisUtils.java" target="_blank" rel="noopener">MybatisUtils.java</a> (直接拿来用)</p>
 </li>
 <li><p>然后我们只需要 <code>SqlSession sqlSession = MybatisUtils.getSqlSession();</code> 就可以用了。</p>
 </li>
@@ -148,7 +148,7 @@
 </li>
 <li><p>创建Mapper XML</p>
 <ul>
-<li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mapper.xml" target="_blank" rel="noopener">mapper.xml</a> (直接拿来用),namespace要和DAO层的Interface名称一致。</li>
+<li><a href="https://github.com/mzdora/Templates-for-SSM/blob/master/mapper.xml" target="_blank" rel="noopener">mapper.xml</a> (直接拿来用)<br>,namespace要和DAO层的Interface名称一致。</li>
 </ul>
 </li>
 <li><p>编写 select SQL标签(mapper.xml)</p>
@@ -171,15 +171,12 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span> <span class="attr">resultType</span>=<span class="string">"com.mzdora.mybatis.entity.Goods"</span>&gt;</span></span><br><span class="line">    SELECT * FROM t_goods WHERE goods_id = #&#123;value&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
-
 </li>
 </ol>
 <ol start="2">
 <li>多参数传递(使用Map):</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectByRange"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.Map"</span> <span class="attr">resultType</span>=<span class="string">"com.mzdora.mybatis.entity.Goods"</span>&gt;</span></span><br><span class="line">    SELECT * FROM t_goods WHERE goods_id BETWEEN #&#123;min&#125; AND #&#123;max&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
 
 <p>以及他们的java代码:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@Test</span></span><br><span class="line"><span class="comment">//单参数传递</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">       Goods list = sqlSession.selectOne(<span class="string">"selectById"</span>, <span class="number">777</span>);</span><br><span class="line">       System.out.println(list);</span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line"><span class="comment">//多参数传递</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">       Map&lt;String,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">       map.put(<span class="string">"min"</span>,<span class="number">555</span>);</span><br><span class="line">       map.put(<span class="string">"max"</span>,<span class="number">888</span>);</span><br><span class="line">       List&lt;Goods&gt; selectByRange = sqlSession.selectList(<span class="string">"selectByRange"</span>, map);</span><br><span class="line">       <span class="keyword">for</span> (Goods goods : selectByRange) &#123;</span><br><span class="line">           System.out.println(goods);</span><br><span class="line">       &#125;</span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
